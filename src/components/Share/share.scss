@@ -1,0 +1,89 @@
+@import "../../style.scss";
+
+.share{
+        box-shadow: 1px 6px 17px 1px rgba(0,0,0,0.09);
+        -webkit-box-shadow: 1px 6px 17px 1px rgba(0,0,0,0.09);
+        -moz-box-shadow: 1px 6px 17px 1px rgba(0,0,0,0.09);
+        border-radius: 20px;
+        background-color: themed("bg");
+        color: themed("textColor");
+        margin-bottom: 50px;
+        width: 80%;
+
+        .container{
+            padding: 20px;
+                
+            .top{
+
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                .left{
+
+                    display: flex;
+                    align-items: center;
+                    flex: 3;
+                    gap: 10px;
+
+                    img{
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                    }
+                    input{
+                        width: 100%;
+                        border: none;
+                        color: themed("textColor");
+                        background-color: transparent;
+                        padding: 20px 0;
+                    }
+                }
+                .right{
+                    flex: 1;
+                    display: flex;
+                    justify-content: flex-end;
+                    .file{
+                        width: 100px;
+                        height: 100px;
+                        object-fit: cover;
+                        border-radius: 0px;
+                    }
+                }
+
+                
+            }
+
+            hr{
+                margin-top: 30px;
+                margin-bottom: 10px;
+                border-bottom: 1px solid themed("border");
+            }
+            
+            .bottom{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                .left{
+                    .item{
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                        cursor: pointer;
+                        font-size: 14px;
+                    }
+                }
+                .right{
+                    button{
+                    border: none;
+                    padding: 5px;
+                    color: white;
+                    cursor: pointer;
+                    background-color: #5271ff;
+                   }
+                }
+            }
+        }
+}

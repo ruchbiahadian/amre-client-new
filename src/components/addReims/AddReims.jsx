@@ -1,0 +1,117 @@
+import "./addReims.scss";
+import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined';
+import { useContext, useState } from "react";
+import {AuthContext} from "../../context/authContext";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
+import {makeRequest} from "../../axios";
+
+const AddReims = () =>{
+
+    const {currentUser} = useContext(AuthContext)
+
+    const [file, setFile] = useState(null)
+
+    const [texts, setTexts] = useState({
+        status: "",
+        kategori: "",
+        nominal: "",
+        jenis: ""
+    });
+
+    const handleChange = (e) =>{
+        setTexts((prev) =>({ ...prev, [e.target.name]: e.target.value}));
+    }; 
+
+    const uploadInvoice = async ()=>{
+        try{
+            const formData = new FormData();
+            formData.append("file", file)
+            const res = await makeRequest.post("/uploadInvoice", formData);
+            return res.data;
+        }catch(err){
+            console.log(err)
+        }
+    }
+
+    const infoRek = async ()=>{
+      try{
+          const res = await makeRequest.get("/rekening/find/" + currentUser.id);
+          return res.data;
+      }catch(err){
+          console.log(err)
+      }
+  }
+    
+
+    const queryClient = useQueryClient()
+
+    const mutation = useMutation((newPost) =>{
+        return makeRequest.post("/reims/add", newPost)
+    }, {
+        onSuccess: () =>{
+            queryClient.invalidateQueries(["posts"])
+        },
+    })
+
+    const handleClick = async (e) =>{
+        e.preventDefault();
+
+        if (!texts.kategori || !texts.nominal || !texts.jenis) {
+            alert("Isi semua form kosong!");
+            return;
+          }
+
+        const rekeningInfo = await infoRek();
+        console.log(rekeningInfo[0])
+
+        if (rekeningInfo[0].nomor === "Belum diisi" || rekeningInfo[0].bank === "Belum diisi" || rekeningInfo[0].namaRek === "Belum diisi") {
+          alert("Isi terlebih dahulu data rekening di halaman profil!");
+          return;
+        }
+
+        let imgURL = "";
+        if (file) imgURL = await uploadInvoice();
+
+        texts.status = "Diajukan"
+        mutation.mutate({...texts, invoicePic: imgURL})
+
+        setTexts("")
+        setFile(null)
+    }
+
+    return (
+        <div className="share">
+  <div className="container">
+    <div className="top">
+      <div className="left">
+        <input type="text" placeholder="kategori" name="kategori" onChange={handleChange} />
+        <input type="number" placeholder="nominal" name="nominal" onChange={handleChange} />
+        <input type="text" placeholder="jenis" name="jenis" onChange={handleChange} />
+      </div>
+      <div className="right">
+        {file && <img className="file" alt="" src={URL.createObjectURL(file)} />}
+      </div>
+    </div>
+    <hr />
+    <div className="bottom">
+      <div className="left">
+        <input type="file" id="file" style={{ display: "none" }} onChange={(e) => setFile(e.target.files[0])} required />
+        <label htmlFor="file">
+          <div className="item">
+            <AddPhotoAlternateOutlinedIcon />
+            <span>Add Image</span>
+          </div>
+        </label>
+      </div>
+      <div className="right">
+        <button onClick={handleClick}>Share</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    )
+
+}
+
+export default AddReims

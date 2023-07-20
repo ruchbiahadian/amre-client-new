@@ -1,0 +1,81 @@
+.login{
+    height: 100vh;
+    background-color: #F7F6FB;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: sans-serif;
+
+    .card{
+        display: flex;
+        background-color: white;
+        width: 50%;
+        border-radius: 10px;
+        min-height: 500px;
+        overflow: hidden;
+
+        .left{
+            flex: 1;
+            background: linear-gradient(rgba(255, 138, 30, 0.4), rgba(255, 138, 30, 0.4)) ,url("../../../public/Assets/bg_login.jpg") center;
+            background-size: cover;
+            padding: 20px 30px;
+            color: white;
+            position: relative;
+
+            span{
+                position: absolute;
+                font-size: 20px;
+                left: 30px;
+                bottom: 20px;
+            }
+        }
+
+        .right{
+            flex: 1;
+            padding: 20px 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            justify-content: center;
+
+            h1{
+                margin-bottom: 0;
+            }
+            p{
+                margin: 5px 0;
+                line-height: 22px;
+                font-size: 15px;
+
+                a{
+                    font-weight: bold;
+                    color: #FF8A1E;
+                }
+            }
+            form{
+                margin-top: 10px;
+                display: flex;
+                flex-direction: column;
+                gap: 25px;
+
+                input{
+                    border: none;
+                    border-bottom: 1px solid lightgray;
+                    padding: 15px 10px;
+                    color: #555;
+                    font-size: 15px;
+                }
+                button{
+                    width: 100%;
+                    padding: 12px;
+                    border: none;
+                    background-color: #FF8A1E;
+                    color: white;
+                    font-weight: bold;
+                    cursor: pointer;
+                    border-radius: 12px;
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+}

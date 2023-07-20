@@ -1,0 +1,101 @@
+/* src/components/ResponsiveTable.scss */
+
+.responsive-table {
+    width: 100%;
+    overflow-x: auto;
+  
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #f9f9f9; /* Light background color */
+  
+      th,
+      td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+  
+      th {
+        background-color: #f2f2f2;
+        &:nth-child(5) {
+          text-align: center; /* Center the heading of the 4th column */
+        }
+      }
+  
+      tr {
+        &:nth-child(even) {
+          background-color: #f2f2f2;
+        }
+  
+        &:hover {
+          background-color: #f9f9f9;
+        }
+  
+        &.center {
+          td {
+            text-align: center; 
+          }
+        }
+      }
+  
+      .child-row {
+        background-color: #fcf5f5;
+  
+        td {
+          padding: 12px;
+          text-align: center; 
+          border: none;
+        }
+      }
+    }
+
+    td{
+        img{
+            max-width: 200px;
+        }
+    }
+  
+    .toBottom {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+  
+      button {
+        display: inline-block;
+        padding: 10px;
+        font-size: 12px;
+        cursor: pointer;
+        text-align: center;
+        border: none;
+  
+        font-weight: bold;
+        border-radius: 5px;
+      }
+  
+      .btnRed {
+        background-color: #fd687c;
+  
+        &:hover {
+          background-color: #b84958;
+        }
+      }
+  
+      .btnGreen {
+        background-color: #62faa7;
+  
+        &:hover {
+          background-color: #43af74;
+        }
+      }
+  
+      .btnBlue {
+        background-color: #5768ff;
+  
+        &:hover {
+          background-color: #323c99;
+        }
+      }
+    }
+  }
+  

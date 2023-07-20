@@ -1,0 +1,71 @@
+@import "../../style.scss";
+
+.leftBar{
+    flex: 2;
+    position: sticky;
+    top: 50px;
+    height: calc(100vh - 50px);
+    overflow: scroll;
+    background-color: $bg;
+    color: $textColor;
+
+    @include mobile{
+        display: none;
+    }
+
+    &::-webkit-scrollbar{
+        display: none;
+   }
+
+    .container{
+        padding: 20px;
+
+        hr{
+            margin: 10px 0px;
+            border: none;
+            height: 0.5px;
+            background-color: $border
+        }
+
+        .menu{
+
+            display: flex;
+            flex-direction: column;
+            gap: 35px;
+         
+            span{
+                font-size: 12px;
+            }
+
+            .user{
+                display: flex;
+                align-items: center;
+                gap: 10px;
+
+                img{
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                }
+
+                span{
+                    font-size: 14px;
+                }
+            }
+
+            .item{
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                
+                img{
+                    width: 30px;
+                }
+                span{
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+}
