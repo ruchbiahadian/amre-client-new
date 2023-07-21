@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './reimTable.scss';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { makeRequest } from '../../axios';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 const ReimTable = () => {
   const { isLoading, error, data } = useQuery(['posts'], () =>
@@ -99,7 +100,7 @@ const handleTolak = async (e, reimId) => {
                       className="btnBlue"
                       onClick={() => handleButtonClick(index)}
                     >
-                      Detail
+                      <KeyboardArrowDownIcon/>
                     </button>
                   </td>
                 </tr>

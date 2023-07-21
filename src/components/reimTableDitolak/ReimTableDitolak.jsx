@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './reimTableDitolak.scss';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { makeRequest } from '../../axios';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 const ReimTableDitolak = () => {
   const { isLoading, error, data } = useQuery(['posts'], () =>
@@ -32,8 +34,8 @@ const ReimTableDitolak = () => {
       },
   })
 
-  const mutationTolak = useMutation((reim) =>{
-    return makeRequest.put("/reims/reimTolak", reim)
+  const mutationHapus = useMutation((reim) =>{
+    return makeRequest.delete("/reims/" + reim)
 }, {
     onSuccess: () =>{
         queryClient.invalidateQueries(["posts"])
@@ -47,9 +49,9 @@ const ReimTableDitolak = () => {
 
 }
 
-const handleTolak = async (e, reimId) => {
+const handleHapus = async (e, reimId) => {
     e.preventDefault();
-    mutationTolak.mutate({id: reimId})
+    mutationHapus.mutate(reimId)
 
 }
 
@@ -90,16 +92,16 @@ const handleTolak = async (e, reimId) => {
                       Terima
                     </button>
                     <button
-                      className="btnRed"
-                      onClick={(e) => handleTolak(e, post.id)}
-                    >
-                      Tolak
-                    </button>
-                    <button
                       className="btnBlue"
                       onClick={() => handleButtonClick(index)}
                     >
-                      Detail
+                    <KeyboardArrowDownIcon/>
+                    </button>
+                    <button
+                      className="btnRed"
+                      onClick={(e) => handleHapus(e, post.id)}
+                    >
+                      <DeleteOutlineIcon/>
                     </button>
                   </td>
                 </tr>

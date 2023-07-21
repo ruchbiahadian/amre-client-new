@@ -1,6 +1,6 @@
 import "./addReims.scss";
 import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined';
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import {AuthContext} from "../../context/authContext";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {makeRequest} from "../../axios";
@@ -17,6 +17,28 @@ const AddReims = () =>{
         nominal: "",
         jenis: ""
     });
+    
+    {console.log(texts)}
+
+  const [getJenisReims, setJenisReims] = useState([])
+
+  const formRef = useRef(null);
+
+  const resetForm = () => {
+    formRef.current.reset();
+  };
+
+    useEffect(() =>{
+        const fetchAllSentra = async ()=>{
+            try {
+              const res = await makeRequest.get("/jenisReims");
+              setJenisReims(res.data);
+            } catch (err) {
+                console.log(err)
+            }
+        }
+        fetchAllSentra()
+    }, [])
 
     const handleChange = (e) =>{
         setTexts((prev) =>({ ...prev, [e.target.name]: e.target.value}));
@@ -56,6 +78,8 @@ const AddReims = () =>{
     const handleClick = async (e) =>{
         e.preventDefault();
 
+        
+
         if (!texts.kategori || !texts.nominal || !texts.jenis) {
             alert("Isi semua form kosong!");
             return;
@@ -77,6 +101,7 @@ const AddReims = () =>{
 
         setTexts("")
         setFile(null)
+        resetForm();
     }
 
     return (
@@ -84,9 +109,23 @@ const AddReims = () =>{
   <div className="container">
     <div className="top">
       <div className="left">
-        <input type="text" placeholder="kategori" name="kategori" onChange={handleChange} />
-        <input type="number" placeholder="nominal" name="nominal" onChange={handleChange} />
-        <input type="text" placeholder="jenis" name="jenis" onChange={handleChange} />
+        <form ref={formRef}>
+
+          <select name="jenis" onChange={handleChange}> 
+                <option value="">Jenis Reimbursement</option>
+                {
+                  getJenisReims.map(jns =>(
+                  <option key={jns.id} value={jns.namaJenis}>{jns.namaJenis}</option>
+                ))
+                          
+                }
+                <option value="Lainnya">Lainnya</option>
+            </select>
+
+          <input type="text" placeholder="kategori" name="kategori" onChange={handleChange} />
+          <input type="number" placeholder="nominal" name="nominal" onChange={handleChange} />
+        </form>
+
       </div>
       <div className="right">
         {file && <img className="file" alt="" src={URL.createObjectURL(file)} />}

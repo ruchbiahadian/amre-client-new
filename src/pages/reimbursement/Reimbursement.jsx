@@ -3,6 +3,7 @@ import AddReims from "../../components/addReims/AddReims"
 import ReimTable from "../../components/reimTable/ReimTable"
 import ReimTableDisetujui from "../../components/reimTableDisetujui/ReimTableDisetujui"
 import ReimTableDitolak from "../../components/reimTableDitolak/ReimTableDitolak"
+import ReimTableJenis from "../../components/jenisReim/JenisReim"
 
 
 import "../home/home.scss"
@@ -25,19 +26,21 @@ const Reimbursement = () => {
 
     return (
         <div className="home">
-            <div className="menu">
+            {currentUser.role === 1 && <div className="menu">
                 <button onClick={() => handleButtonClick(1)}>Diajukan</button>
                 <button onClick={() => handleButtonClick(2)}>Disetujui</button>
                 <button onClick={() => handleButtonClick(3)}>Ditolak</button>
-            </div>
+                <button onClick={() => handleButtonClick(4)}>Jenis Reimbursement</button>
+            </div>}
 
             {currentUser.role !== 1 && (<AddReims />)}
             {currentUser.role !== 1 && (<Reims /> )}
 
 
-            {selectedRow === 1 && (<ReimTable /> )}
-            {selectedRow === 2 && (<ReimTableDisetujui /> )}
-            {selectedRow === 3 && (<ReimTableDitolak/> )}
+            {selectedRow === 1 && currentUser.role === 1 && (<ReimTable /> )}
+            {selectedRow === 2 && currentUser.role === 1 && (<ReimTableDisetujui /> )}
+            {selectedRow === 3 && currentUser.role === 1 && (<ReimTableDitolak/> )}
+            {selectedRow === 4 && currentUser.role === 1 && (<ReimTableJenis/> )}
 
             {/* {currentUser.role === 1 && (<R(<ReimTable /> eimTable /> )} */}
             

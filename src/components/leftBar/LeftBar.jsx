@@ -48,6 +48,12 @@ const LeftBar = () =>{
                     </div>
                     <div className="item">
                         <img src={Icon} alt=""/>
+                        <Link to="/acara" style={{textDecoration: "none", color: "inherit"}}>
+                            <span>Acara</span>
+                        </Link>
+                    </div>
+                    <div className="item">
+                        <img src={Icon} alt=""/>
                         <Link to="/reimbursement" style={{textDecoration: "none", color: "inherit"}}>
                             <span>Reimbursement</span>
                         </Link>

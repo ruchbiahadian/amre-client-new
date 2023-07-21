@@ -4,6 +4,7 @@ import Register from "./pages/register/Register";
 import Home from "./pages/home/Home";
 import Profile from "./pages/profile/Profile";
 import Reimbursement from "./pages/reimbursement/Reimbursement";
+import Acara from "./pages/acara/Acara";
 import Navbar from "./components/navBar/NavBar";
 import Leftbar from "./components/leftBar/LeftBar";
 import {
@@ -71,6 +72,10 @@ function App() {
         {
           path:"/reimbursement",
           element: <Reimbursement/>
+        },
+        {
+          path:"/acara",
+          element: <Acara/>
         },
       ]
     },

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './reimTableDisetujui.scss';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { makeRequest } from '../../axios';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 const ReimTableDisetujui = () => {
   const { isLoading, error, data } = useQuery(['posts'], () =>
@@ -40,13 +41,6 @@ const ReimTableDisetujui = () => {
     },
 })
 
-
-  const handleTerima = async (e, reimId) => {
-    e.preventDefault();
-    mutationTerima.mutate({id: reimId})
-
-}
-
 const handleTolak = async (e, reimId) => {
     e.preventDefault();
     mutationTolak.mutate({id: reimId})
@@ -84,12 +78,6 @@ const handleTolak = async (e, reimId) => {
                   <td className="toBottom">
                     {/* Pass the row index to the onClick handler */}
                     <button
-                      className="btnGreen"
-                      onClick={(e) => handleTerima(e, post.id)}
-                    >
-                      Terima
-                    </button>
-                    <button
                       className="btnRed"
                       onClick={(e) => handleTolak(e, post.id)}
                     >
@@ -99,7 +87,7 @@ const handleTolak = async (e, reimId) => {
                       className="btnBlue"
                       onClick={() => handleButtonClick(index)}
                     >
-                      Detail
+                      <KeyboardArrowDownIcon/>
                     </button>
                   </td>
                 </tr>
