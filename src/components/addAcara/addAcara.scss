@@ -1,0 +1,70 @@
+@import "../../style.scss";
+
+.share {
+    background-color: white;
+
+    .container {
+      .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+        .left {
+          display: flex;
+          align-items: center;
+          
+          img {
+            margin-right: 10px;
+          }
+          
+          input {
+            margin-right: 10px;
+            
+            &:last-child {
+              margin-right: 0;
+            }
+          }
+        }
+      }
+      
+      hr {
+        margin: 20px 0;
+        border: none;
+        border-top: 1px solid #ccc;
+      }
+      
+      .bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+        .left {
+          .item {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            
+            svg {
+              margin-right: 5px;
+            }
+          }
+        }
+        
+        .right {
+          button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            
+            &:hover {
+              background-color: #0056b3;
+            }
+          }
+        }
+      }
+    }
+  }
+  

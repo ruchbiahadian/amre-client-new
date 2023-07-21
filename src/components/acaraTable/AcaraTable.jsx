@@ -4,6 +4,8 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { makeRequest } from '../../axios';
 import UpdateAcara from "../updateAcara/UpdateAcara";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import addAcara from "../addAcara/AddAcara";
+import AddAcara from '../addAcara/AddAcara';
 
 const AcaraTable = () => {
 
@@ -40,6 +42,7 @@ const handleHapus = async (e, reimId) => {
 
   return (
     <div className="responsive-table">
+      <AddAcara/>
       {error ? (
         <p>Something went wrong!</p>
       ) : isLoading ? (

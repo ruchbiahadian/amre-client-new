@@ -60,13 +60,12 @@ const LeftBar = () =>{
                     </div>
                     <div className="item">
                         <img src={Icon} alt=""/>
-                        <span>Absensi</span>
+                        <Link to="/absensi" style={{textDecoration: "none", color: "inherit"}}>
+                            <span>Absensi</span>
+                        </Link>
                     </div>
                     <div className="item">
                         <img src={Icon} alt=""/>
-                        {/* <Link to={`/logout`} style={{textDecoration: "none", color: "inherit"}}>
-                            <span>Keluar</span>
-                        </Link> */}
                         <button onClick={handleClick}>Keluar</button>
                     </div>
                 </div>

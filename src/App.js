@@ -4,8 +4,8 @@ import Register from "./pages/register/Register";
 import Home from "./pages/home/Home";
 import Profile from "./pages/profile/Profile";
 import Reimbursement from "./pages/reimbursement/Reimbursement";
+import Absensi from "./pages/absensi/Absensi";
 import Acara from "./pages/acara/Acara";
-import Navbar from "./components/navBar/NavBar";
 import Leftbar from "./components/leftBar/LeftBar";
 import {
   createBrowserRouter,
@@ -76,6 +76,10 @@ function App() {
         {
           path:"/acara",
           element: <Acara/>
+        },
+        {
+          path:"/absensi",
+          element: <Absensi/>
         },
       ]
     },

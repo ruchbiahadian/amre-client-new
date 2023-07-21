@@ -21,6 +21,7 @@ const AddReims = () =>{
     {console.log(texts)}
 
   const [getJenisReims, setJenisReims] = useState([])
+  const [getActiveAcara, setActiveAcara] = useState([])
 
   const formRef = useRef(null);
 
@@ -39,6 +40,18 @@ const AddReims = () =>{
         }
         fetchAllSentra()
     }, [])
+
+    useEffect(() =>{
+      const fetchAllSentra = async ()=>{
+          try {
+            const res = await makeRequest.get("/acara/aktif");
+            setActiveAcara(res.data);
+          } catch (err) {
+              console.log(err)
+          }
+      }
+      fetchAllSentra()
+  }, [])
 
     const handleChange = (e) =>{
         setTexts((prev) =>({ ...prev, [e.target.name]: e.target.value}));
@@ -122,7 +135,16 @@ const AddReims = () =>{
                 <option value="Lainnya">Lainnya</option>
             </select>
 
-          <input type="text" placeholder="kategori" name="kategori" onChange={handleChange} />
+            <select name="kategori" onChange={handleChange}> 
+                <option value="">Kategori / Acara</option>
+                {
+                  getActiveAcara.map(acr =>(
+                  <option key={acr.id} value={acr.namaAcara}>{acr.namaAcara}</option>
+                ))
+                          
+                }
+                <option value="Lainnya">Lainnya</option>
+            </select>
           <input type="number" placeholder="nominal" name="nominal" onChange={handleChange} />
         </form>
 

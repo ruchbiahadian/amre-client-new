@@ -1,0 +1,17 @@
+@import "../../style.scss";
+
+
+.home{
+    background-color: $bgSoft;
+    padding: 0 100px;
+    min-height: 100%;
+    padding-top: 80px;
+
+    @include mobile{
+      padding: 10px;
+    }
+
+    @include tablet{
+      padding: 20px;
+    }
+}
