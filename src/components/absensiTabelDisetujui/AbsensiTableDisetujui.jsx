@@ -81,7 +81,7 @@ const handleTolak = async (e, reimId) => {
                     {(() => new Date(post.createdAt).toLocaleDateString('en-GB'))()}
                   </td>
                   <td>{post.nama}</td>
-                  <td>{post.namaAcara}</td>
+                  <td>{post.kategori}</td>
                   <td className="toBottom">
                     {/* Pass the row index to the onClick handler */}
                     <button
@@ -104,13 +104,9 @@ const handleTolak = async (e, reimId) => {
                     <td colSpan="3">
                       <table>
                         <tbody>
-                         <tr>
+                          <tr>
                             <td>Email:</td>
                             <td>{post.email}</td>
-                          </tr>
-                          <tr>
-                            <td>Maksimal Absen:</td>
-                            <td>{(() => new Date(post.maxAbsen).toLocaleDateString('en-GB'))()}</td>
                           </tr>
                           <tr>
                             <td>No Telepon:</td>

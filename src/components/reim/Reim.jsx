@@ -49,7 +49,7 @@ const Reim = ({post}) => {
                     <div className="left">
                         <p>Status: {post.status}</p>
                         <p>Tanggal: {(() => new Date(post.createdAt).toLocaleDateString('en-GB'))()}</p>
-                        <p>Kategori: {post.kategori}</p>
+                        <p>Kategori / Acara: {post.kategori}</p>
                         <p>Nominal: {post.nominal}</p>
                         <p>Jenis: {post.jenis}</p>
                         <p>Nomor Rekening: {post.nomor}</p>

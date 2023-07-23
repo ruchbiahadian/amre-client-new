@@ -66,6 +66,18 @@ const LeftBar = () =>{
                     </div>
                     <div className="item">
                         <img src={Icon} alt=""/>
+                        <Link to="/laporan" style={{textDecoration: "none", color: "inherit"}}>
+                            <span>Laporan</span>
+                        </Link>
+                    </div>
+                    <div className="item">
+                        <img src={Icon} alt=""/>
+                        <Link to="/akun" style={{textDecoration: "none", color: "inherit"}}>
+                            <span>Kelola Akun</span>
+                        </Link>
+                    </div>
+                    <div className="item">
+                        <img src={Icon} alt=""/>
                         <button onClick={handleClick}>Keluar</button>
                     </div>
                 </div>

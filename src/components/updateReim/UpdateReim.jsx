@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import "./updateReim.scss"
 import {makeRequest} from "../../axios";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
@@ -16,6 +16,33 @@ const UpdateReim = ({setUpdateOpen, reim}) =>{
         nominal: "",
         jenis: ""
     });
+
+    const [getJenisReims, setJenisReims] = useState([])
+    const [getActiveAcara, setActiveAcara] = useState([])
+
+    useEffect(() =>{
+        const fetchAllSentra = async ()=>{
+            try {
+              const res = await makeRequest.get("/jenisReims");
+              setJenisReims(res.data);
+            } catch (err) {
+                console.log(err)
+            }
+        }
+        fetchAllSentra()
+    }, [])
+
+    useEffect(() =>{
+      const fetchAllSentra = async ()=>{
+          try {
+            const res = await makeRequest.get("/acara/aktif");
+            setActiveAcara(res.data);
+          } catch (err) {
+              console.log(err)
+          }
+      }
+      fetchAllSentra()
+  }, [])
 
     const handleChange = (e) =>{
         setTexts((prev) =>({ ...prev, [e.target.name]: e.target.value}));
@@ -65,10 +92,28 @@ const UpdateReim = ({setUpdateOpen, reim}) =>{
             
             <form action="">
                <input type="file" onChange={e=>setProfile(e.target.files[0])}/> 
-               {/* <input type="text" placeholder="status" name="status" onChange={handleChange} /> */}
-               <input type="text" placeholder="kategori" name="kategori" onChange={handleChange}  />
+               
+                <select name="jenis" onChange={handleChange}> 
+                    <option value="">Jenis Reimbursement</option>
+                    {
+                    getJenisReims.map(jns =>(
+                    <option key={jns.id} value={jns.namaJenis}>{jns.namaJenis}</option>
+                    ))
+                            
+                    }
+                </select>
+
+                <select name="kategori" onChange={handleChange}> 
+                    <option value="">Kategori / Acara</option>
+                    {
+                    getActiveAcara.map(acr =>(
+                    <option key={acr.id} value={acr.namaAcara}>{acr.namaAcara}</option>
+                    ))
+                            
+                    }
+                </select>
+
                <input type="input" placeholder="nominal" name="nominal" onChange={handleChange}  />
-               <input type="text" placeholder="jenis" name="jenis" onChange={handleChange}  />
                <button onClick={handleClick}>Update</button>
             </form>
         </div>

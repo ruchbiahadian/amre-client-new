@@ -6,6 +6,8 @@ import Profile from "./pages/profile/Profile";
 import Reimbursement from "./pages/reimbursement/Reimbursement";
 import Absensi from "./pages/absensi/Absensi";
 import Acara from "./pages/acara/Acara";
+import Akun from "./pages/akun/Akun";
+import Laporan from "./pages/laporan/Laporan";
 import Leftbar from "./components/leftBar/LeftBar";
 import {
   createBrowserRouter,
@@ -80,6 +82,14 @@ function App() {
         {
           path:"/absensi",
           element: <Absensi/>
+        },
+        {
+          path:"/akun",
+          element: <Akun/>
+        },
+        {
+          path:"/laporan",
+          element: <Laporan/>
         },
       ]
     },

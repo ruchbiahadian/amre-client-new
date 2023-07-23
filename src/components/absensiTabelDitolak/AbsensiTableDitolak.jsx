@@ -83,7 +83,7 @@ const handleHapus = async (e, reimId) => {
                     {(() => new Date(post.createdAt).toLocaleDateString('en-GB'))()}
                   </td>
                   <td>{post.nama}</td>
-                  <td>{post.namaAcara}</td>
+                  <td>{post.kategori}</td>
                   <td className="toBottom">
                     {/* Pass the row index to the onClick handler */}
                     <button
@@ -112,30 +112,26 @@ const handleHapus = async (e, reimId) => {
                     <td colSpan="3">
                       <table>
                         <tbody>
-                         <tr>
-                            <td>Email:</td>
-                            <td>{post.email}</td>
-                          </tr>
                           <tr>
-                            <td>Maksimal Absen:</td>
-                            <td>{(() => new Date(post.maxAbsen).toLocaleDateString('en-GB'))()}</td>
-                          </tr>
-                          <tr>
-                            <td>No Telepon:</td>
-                            <td>{post.noTelp}</td>
-                          </tr>
-                          <tr>
-                            <td>Universitas:</td>
-                            <td>{post.univ}</td>
-                          </tr>
-                          <tr>
-                            <td>Jenis Magang:</td>
-                            <td>{post.jenis}</td>
-                          </tr>
-                          <tr>
-                            <td>Tahun Magang:</td>
-                            <td>{post.tahun}</td>
-                          </tr>
+                              <td>Email:</td>
+                              <td>{post.email}</td>
+                            </tr>
+                            <tr>
+                              <td>No Telepon:</td>
+                              <td>{post.noTelp}</td>
+                            </tr>
+                            <tr>
+                              <td>Universitas:</td>
+                              <td>{post.univ}</td>
+                            </tr>
+                            <tr>
+                              <td>Jenis Magang:</td>
+                              <td>{post.jenis}</td>
+                            </tr>
+                            <tr>
+                              <td>Tahun Magang:</td>
+                              <td>{post.tahun}</td>
+                            </tr>
                         </tbody>
                       </table>
                     </td>

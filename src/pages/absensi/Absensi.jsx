@@ -1,5 +1,5 @@
-import Reims from "../../components/reims/Reims"
-import AddReims from "../../components/addReims/AddReims"
+import Absens from "../../components/absens/Absens"
+import AddAbsen from "../../components/addAbsen/AddAbsen"
 import AbsensiTable from "../../components/absensiTable/AbsensiTable"
 import AbsensiTableDisetujui from "../../components/absensiTabelDisetujui/AbsensiTableDisetujui"
 import AbsensiTableDitolak from "../../components/absensiTabelDitolak/AbsensiTableDitolak"
@@ -30,9 +30,8 @@ const Reimbursement = () => {
                 <button onClick={() => handleButtonClick(3)}>Ditolak</button>
             </div>}
 
-            {currentUser.role !== 1 && (<AddReims />)}
-            {currentUser.role !== 1 && (<Reims /> )}
-
+            {currentUser.role !== 1 && (<AddAbsen /> )}
+            {currentUser.role !== 1 && (<Absens /> )}
 
             {selectedRow === 1 && currentUser.role === 1 && (<AbsensiTable /> )}
             {selectedRow === 2 && currentUser.role === 1 && (<AbsensiTableDisetujui /> )}

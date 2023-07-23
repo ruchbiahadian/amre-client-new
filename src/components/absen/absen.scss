@@ -1,0 +1,59 @@
+@import "../../style.scss";
+
+.invoice{
+        box-shadow: 1px 6px 17px 1px rgba(0,0,0,0.09);
+        -webkit-box-shadow: 1px 6px 17px 1px rgba(0,0,0,0.09);
+        -moz-box-shadow: 1px 6px 17px 1px rgba(0,0,0,0.09);
+        border-radius: 20px;
+        background-color: $bg;
+        color: $textColor;
+        width: 80%;
+
+        .container{
+            padding: 20px;
+     
+            .user{
+                display: flex;
+                gap: 10px;
+                justify-content: flex-end;
+                align-items: center;
+                padding: 10px;
+            }
+
+            .content{
+                display: flex;
+
+
+                .left{
+                    flex: 1;
+                }
+
+                .right{
+                    flex: 1;
+                    justify-self: center;
+                    align-items: center;
+                    
+                    img{
+                        max-width: 80%;
+                        object-fit: cover;
+                        display: block;
+                        margin: 0 auto;
+                    }
+                }
+                
+            }
+
+            .info{
+                display: flex;
+                align-items: center;
+                gap: 20px;
+
+                .item{
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    cursor: pointer;
+                    font-size: 14px;
+                }
+            }
+}}

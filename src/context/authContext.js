@@ -46,7 +46,7 @@ export const AuthContextProvider = ({ children }) => {
     if (typeof localStorage !== "undefined") {
       const userObject = {
         data: currentUser,
-        expires: Date.now() + (3600000 * 2), 
+        expires: Date.now() + (3600000 * 6), 
       };
       localStorage.setItem("user", JSON.stringify(userObject));
     }

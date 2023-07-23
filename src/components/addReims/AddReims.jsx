@@ -15,10 +15,10 @@ const AddReims = () =>{
         status: "",
         kategori: "",
         nominal: "",
-        jenis: ""
+        jenis: "",
+        acaraId: 0
     });
     
-    {console.log(texts)}
 
   const [getJenisReims, setJenisReims] = useState([])
   const [getActiveAcara, setActiveAcara] = useState([])
@@ -53,9 +53,23 @@ const AddReims = () =>{
       fetchAllSentra()
   }, [])
 
-    const handleChange = (e) =>{
-        setTexts((prev) =>({ ...prev, [e.target.name]: e.target.value}));
-    }; 
+    // const handleChange = (e) =>{
+    //     setTexts((prev) =>({ ...prev, [e.target.name]: e.target.value}));
+    // }; 
+
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      if (name === "kategori") {
+        const selectedAcara = getActiveAcara.find((acr) => acr.namaAcara === value);
+        setTexts((prev) => ({
+          ...prev,
+          [name]: value,
+          acaraId: selectedAcara ? selectedAcara.id : 0,
+        }));
+      } else {
+        setTexts((prev) => ({ ...prev, [name]: value }));
+      }
+    };
 
     const uploadInvoice = async ()=>{
         try{
@@ -76,6 +90,15 @@ const AddReims = () =>{
           console.log(err)
       }
   }
+
+    const checkReim = async (acaraId)=>{
+      try{
+          const res = await makeRequest.get("/reims/checkReim/" + acaraId);
+          return res.data;
+      }catch(err){
+          console.log(err)
+      }
+  }
     
 
     const queryClient = useQueryClient()
@@ -91,15 +114,38 @@ const AddReims = () =>{
     const handleClick = async (e) =>{
         e.preventDefault();
 
-        
-
         if (!texts.kategori || !texts.nominal || !texts.jenis) {
             alert("Isi semua form kosong!");
             return;
           }
 
+          if (!file) {
+            alert("Upload Invoice!");
+            return;
+          }
+
+        const checkReimInfo = await checkReim(texts.acaraId);
+        
+        if (parseInt(checkReimInfo[0].plafon_value) !== 0) {
+          if (parseInt(texts.nominal) > parseInt(checkReimInfo[0].plafon_value)) {
+            alert("Maksimal " + parseInt(checkReimInfo[0].plafon_value));
+            return;
+          }
+        
+          var totalNominalInt = parseInt(checkReimInfo[0].total_nominal);
+        
+          if (!isNaN(totalNominalInt)) {
+            if ((parseInt(texts.nominal) + totalNominalInt) > parseInt(checkReimInfo[0].plafon_value)) {
+              alert("Maksimal pengajuan reimbursement anda pada acara ini tersisa " + (parseInt(checkReimInfo[0].plafon_value) - totalNominalInt) + " dari plafon " + parseInt(checkReimInfo[0].plafon_value));
+              return;
+            }
+          }
+        }
+        
+
+
         const rekeningInfo = await infoRek();
-        console.log(rekeningInfo[0])
+        
 
         if (rekeningInfo[0].nomor === "Belum diisi" || rekeningInfo[0].bank === "Belum diisi" || rekeningInfo[0].namaRek === "Belum diisi") {
           alert("Isi terlebih dahulu data rekening di halaman profil!");
@@ -132,7 +178,6 @@ const AddReims = () =>{
                 ))
                           
                 }
-                <option value="Lainnya">Lainnya</option>
             </select>
 
             <select name="kategori" onChange={handleChange}> 
@@ -143,7 +188,6 @@ const AddReims = () =>{
                 ))
                           
                 }
-                <option value="Lainnya">Lainnya</option>
             </select>
           <input type="number" placeholder="nominal" name="nominal" onChange={handleChange} />
         </form>

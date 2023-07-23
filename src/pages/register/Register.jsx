@@ -31,10 +31,12 @@ const Register = () => {
 
         try{
             await axios.post("http://localhost:8800/api/auth/register", inputs);
-            alert("Berhasil, silahkan login!");
+            alert("Pendaftaran berhasil diajukan, Tunggu persetujuan admin!");
             navigate("/login")
         }catch(err){
+            alert(err.response.data);
             setErr(err.response.data);
+            window.location.reload();
         }
     }   
 
