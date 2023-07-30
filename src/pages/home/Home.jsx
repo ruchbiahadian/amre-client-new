@@ -1,16 +1,30 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import Posts from "../../components/posts/Posts"
 import Share from "../../components/Share/Share"
 import "./home.scss"
 import { AuthContext } from "../../context/authContext";
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 const Home = () => {
     const {currentUser} = useContext(AuthContext);
+    const [addOpen, setAddOpen] = useState(false);
+    
 
     return (
-        <div className="home">
-            {currentUser.role === 1 && (<Share/>)}
-            <Posts/> 
+        <div className="homee">
+            <div className="container">
+                {currentUser.role === 1 &&
+                    <div className="tambah" onClick={()=>setAddOpen(!addOpen)}>
+                        <div className="icon">
+                            <AddCircleIcon/>
+                        </div>
+                        Buat berita baru
+                    </div>
+                }
+                {addOpen && currentUser.role === 1 && (<Share setAddOpen={setAddOpen} />)}
+                {addOpen && currentUser.role === 1 && (<div className="blackBg" onClick={()=>setAddOpen(!addOpen)} />)}
+                <Posts/> 
+            </div>
         </div>
     )
 }

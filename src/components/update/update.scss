@@ -1,13 +1,43 @@
-.update{
-    position: absolute;
+@import "../../style.scss";
+
+.updateProfile{
+    position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     margin: auto;
-    width: 50%;
-    height: 50%;
+    width: fit-content;
+    height: fit-content;
     background-color: white;
-    padding: 50px;
+    padding: 40px;
     z-index: 999;
+    border-radius: 10px;
+
+    form{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+
+        label{
+            .icon{
+                font-size: 100px;
+                cursor: pointer;
+            }
+        }
+
+        img{
+            width: 100px;
+        }
+
+        button{
+            border: none;
+            background-color: $main;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+    }
 }

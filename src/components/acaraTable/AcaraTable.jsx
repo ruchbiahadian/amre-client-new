@@ -4,8 +4,6 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { makeRequest } from '../../axios';
 import UpdateAcara from "../updateAcara/UpdateAcara";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import addAcara from "../addAcara/AddAcara";
-import AddAcara from '../addAcara/AddAcara';
 
 const AcaraTable = () => {
 
@@ -41,8 +39,7 @@ const handleHapus = async (e, reimId) => {
   
 
   return (
-    <div className="responsive-table">
-      <AddAcara/>
+    <div className="reimAbsenTable">
       {error ? (
         <p>Something went wrong!</p>
       ) : isLoading ? (
@@ -72,7 +69,6 @@ const handleHapus = async (e, reimId) => {
                   <td>{(() => new Date(post.maxAbsen).toLocaleDateString('en-GB'))()}</td>
                   
                   <td className="toBottom">
-                    {/* Pass the row index to the onClick handler */}
                     <button
                       className="btnBlue"
                       onClick={()=>handleUpdateClick(post)}
@@ -93,6 +89,7 @@ const handleHapus = async (e, reimId) => {
         </table>
       )}
         {updateOpen && selectedPost && <UpdateAcara setUpdateOpen={setUpdateOpen} reim={selectedPost} />}
+        {updateOpen && selectedPost && <div className="blackBg" onClick={()=>setUpdateOpen(!setUpdateOpen)} />}
     </div>
   );
 };

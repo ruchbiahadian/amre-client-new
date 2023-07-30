@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom"
 import "./post.scss"
-import TextsmsOutlinedIcon from '@mui/icons-material/TextsmsOutlined';
-import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
+import NotesOutlinedIcon from '@mui/icons-material/NotesOutlined';
+import RemoveCircleOutlinedIcon from '@mui/icons-material/RemoveCircleOutlined';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import Comments from "../comments/Comments";
 import UpdatePost from "../updatePost/UpdatePost";
 import { useContext, useState } from "react";
@@ -18,7 +19,6 @@ const Post = ({post}) => {
 
     const [commentOpen, setCommentOpen] = useState(false);
     const [updateOpen, setUpdateOpen] = useState(false);
-    const [menuOpen, setMenuOpen] = useState(false);
 
     const queryClient = useQueryClient()
 
@@ -48,8 +48,7 @@ const Post = ({post}) => {
                             <span className="date">{moment(post.createdAt).fromNow()}</span>
                         </div>
                     </div>
-                    <MoreHorizOutlinedIcon onClick={()=>setMenuOpen(true)} />
-                    {menuOpen && post.userId === currentUser.id && <button onClick={handleDelete}>delete</button>}
+                    {post.userId === currentUser.id &&  <RemoveCircleOutlinedIcon className="clearIcon" onClick={handleDelete} />}
                 </div>
                 <div className="content">
                     <p>{post.desc}</p>
@@ -57,16 +56,19 @@ const Post = ({post}) => {
                 </div>
                 <div className="info">
                     <div className="item" onClick={()=>setCommentOpen(!commentOpen)}>
-                        <TextsmsOutlinedIcon/>
+                        <NotesOutlinedIcon/>
                         Komentar
                     </div>
-                    <div className="item" onClick={()=>setUpdateOpen(!updateOpen)}>
-                        <TextsmsOutlinedIcon/>
-                        Update
-                    </div>
+                    {post.userId === currentUser.id &&
+                        <div className="item" onClick={()=>setUpdateOpen(!updateOpen)}>
+                            <EditOutlinedIcon/>
+                            Update
+                        </div>
+                    }
                 </div>
                 {commentOpen && <Comments postId={post.id} />}
-                {updateOpen && <UpdatePost setUpdateOpen={setUpdateOpen} reim={post} />}
+                {post.userId === currentUser.id && updateOpen && <UpdatePost setUpdateOpen={setUpdateOpen} reim={post} />}
+                {updateOpen && (<div className="blackBg" onClick={()=>setUpdateOpen(!updateOpen)} />)}
             </div>
         </div>
     )

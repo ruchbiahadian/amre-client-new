@@ -58,7 +58,7 @@ const handleHapus = async (e, reimId) => {
 
 
   return (
-    <div className="responsive-table">
+    <div className="reimAbsenTable">
       {error ? (
         <p>Something went wrong!</p>
       ) : isLoading ? (

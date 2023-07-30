@@ -1,11 +1,11 @@
 import "./share.scss";
-import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined';
 import { useContext, useState } from "react";
 import {AuthContext} from "../../context/authContext";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {makeRequest} from "../../axios";
+import AddAPhotoOutlinedIcon from '@mui/icons-material/AddAPhotoOutlined';
 
-const Share = () =>{
+const Share = ({setAddOpen}) =>{
 
     const {currentUser} = useContext(AuthContext)
 
@@ -38,17 +38,18 @@ const Share = () =>{
         let imgURL = "";
         if (file) imgURL = await upload();
         mutation.mutate({desc, img: imgURL})
+        setAddOpen(false)
         setDesc("")
         setFile(null)
     }
 
     return (
-        <div className="share">
+        <div className="sharee">
             <div className="container">
                 <div className="top">
                     <div className="left">
                         <img src={`/profile/`+currentUser.profilePic} alt="" />
-                        <input type="text" placeholder={`What's on your mind?`} 
+                        <input type="text" placeholder={`Buat berita baru?`} 
                         onChange={(e) => setDesc(e.target.value)}
                         value={desc} />
                     </div>
@@ -63,13 +64,13 @@ const Share = () =>{
                         <input type="file" id="file" style={{display: "none"}} onChange={(e) => setFile(e.target.files[0])}/>
                         <label htmlFor="file">
                             <div className="item">
-                                <AddPhotoAlternateOutlinedIcon/>
-                                <span>Add Image</span>
+                                <AddAPhotoOutlinedIcon/>
+                                <span>Tambah Gambar</span>
                             </div>
                         </label>
                     </div>
                     <div className="right">
-                        <button onClick={handleClick}>Share</button>
+                        <button onClick={handleClick}>Tambah</button>
                     </div>
                 </div>
             </div>

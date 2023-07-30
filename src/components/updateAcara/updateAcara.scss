@@ -1,13 +1,47 @@
-.update{
-    position: absolute;
+@import "../../style.scss";
+
+.updateAcara {
+    position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     margin: auto;
-    width: 50%;
-    height: 50%;
+    max-width: 40%;
+    max-height: fit-content;
     background-color: white;
-    padding: 50px;
     z-index: 999;
+    border-radius: 20px;
+    background-color: $bg;
+    color: $textColor;
+
+
+    .container {
+      padding: 20px;
+      form{
+
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+
+        input, select{
+          padding: 8px;
+        }
+
+        .item{
+          display: flex;
+          gap: 5px;
+          flex-direction: column;
+        }
+
+        button{
+          padding: 10px;
+          background-color: $main;
+          color: white;
+          border-radius: 10px;
+          border: none;
+        }
+      }
+    } 
 }
+  

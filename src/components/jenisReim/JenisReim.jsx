@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './jenisReim.scss';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { makeRequest } from '../../axios';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { AuthContext } from "../../context/authContext";
 
 const JenisReim = () => {
   const { isLoading, error, data } = useQuery(['posts'], () =>
@@ -11,7 +13,9 @@ const JenisReim = () => {
     })
   );
 
+  const {currentUser} = useContext(AuthContext);
   const [texts, setTexts] = useState();
+  const [addOpen, setAddOpen] = useState(false);
 
   const queryClient = useQueryClient()
   
@@ -54,47 +58,57 @@ const JenisReim = () => {
 
 
   return (
-    <div className="responsive-table">
+    <div>
 
-      <input type="text" placeholder='Tambah Jenis Reimbursement' onChange={(e) => setTexts(e.target.value)} />
-      <button onClick={handleClick}>Tambah</button>
+      <div className="tambah" onClick={()=>setAddOpen(!addOpen)}>
+          <div className="icon">
+              <AddCircleIcon/>
+          </div>
+          Buat Acara Baru
+       </div>
 
+       {addOpen && currentUser.role === 1 && 
+       <div className="input">
+          <input type="text" placeholder='Tambah Jenis Reimbursement' onChange={(e) => setTexts(e.target.value)} />
+          <button onClick={handleClick}>Tambah</button>
+        </div> 
+       }
       
-
-
-      {error ? (
-        <p>Something went wrong!</p>
-      ) : isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        <table>
-          <thead>
-            <tr>
-              <th>No</th>
-              <th>Nama</th>
-              <th>Aksi</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((post, index) => (
-              <React.Fragment key={index}>
-                <tr>
-                  <td>{index + 1}</td>
-                  <td>{post.namaJenis}</td>
-                  <td className="toBottom">
-                    <button
-                      className="btnRed"
-                      onClick={(e) => handleHapus(e, post.id)}
-                    >
-                      <DeleteOutlineIcon/>
-                    </button>
-                  </td>
-                </tr>
-              </React.Fragment>
-            ))}
-          </tbody>
-        </table>
-      )}
+      <div className='reimAbsenTable'>
+        {error ? (
+          <p>Something went wrong!</p>
+        ) : isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          <table>
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Nama</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((post, index) => (
+                <React.Fragment key={index}>
+                  <tr>
+                    <td>{index + 1}</td>
+                    <td>{post.namaJenis}</td>
+                    <td className="toBottom">
+                      <button
+                        className="btnRed"
+                        onClick={(e) => handleHapus(e, post.id)}
+                      >
+                        <DeleteOutlineIcon/>
+                      </button>
+                    </td>
+                  </tr>
+                </React.Fragment>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
     </div>
   );
 };

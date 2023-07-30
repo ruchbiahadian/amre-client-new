@@ -3,6 +3,7 @@ import "./update.scss"
 import {makeRequest} from "../../axios";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import { AuthContext } from "../../context/authContext";
+import PhotoIcon from '@mui/icons-material/AddPhotoAlternate';
 
 const Update = ({setOpenUpdate, user}) =>{
 
@@ -45,13 +46,16 @@ const Update = ({setOpenUpdate, user}) =>{
     }
 
     return(
-        <div className="update">
-            Update
-            <button onClick={()=>setOpenUpdate(false)}>X</button>
-
+        <div className="updateProfile">
             <form action="">
-               <input type="file" onChange={e=>setProfile(e.target.files[0])}/> 
-               <button onClick={handleClick}>Update</button>
+               <input type="file" id="file" onChange={e=>setProfile(e.target.files[0])} style={{display: "none"}}/>
+               {!profile && 
+                    <label htmlFor="file">
+                        <PhotoIcon className="icon"/> 
+                    </label>
+               }
+               {profile && <img alt="" src={URL.createObjectURL(profile)} />}
+               {profile && <button onClick={handleClick}>Update</button>}
             </form>
         </div>
     )

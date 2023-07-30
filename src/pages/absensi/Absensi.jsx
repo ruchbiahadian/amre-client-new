@@ -12,22 +12,22 @@ import { useContext, useState } from "react";
 
 const Reimbursement = () => {
     const {currentUser} = useContext(AuthContext);
-
+    const [activeButton, setActiveButton] = useState(1);
     
     const [selectedRow, setSelectedRow] = useState(1);
 
     const handleButtonClick = (index) => {
-        
+        setActiveButton(index)
         setSelectedRow((prevIndex) => (prevIndex === index ? -1 : index));
     };
 
 
     return (
-        <div className="home">
+        <div className="absensiMenu">
             {currentUser.role === 1 && <div className="menu">
-                <button onClick={() => handleButtonClick(1)}>Diajukan</button>
-                <button onClick={() => handleButtonClick(2)}>Disetujui</button>
-                <button onClick={() => handleButtonClick(3)}>Ditolak</button>
+                <button onClick={() => handleButtonClick(1)} className={`${activeButton === 1 ? 'active' : ''}`}>Diajukan</button>
+                <button onClick={() => handleButtonClick(2)} className={`${activeButton === 2 ? 'active' : ''}`}>Disetujui</button>
+                <button onClick={() => handleButtonClick(3)} className={`${activeButton === 3 ? 'active' : ''}`}>Ditolak</button>
             </div>}
 
             {currentUser.role !== 1 && (<AddAbsen /> )}

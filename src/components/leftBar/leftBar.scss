@@ -3,9 +3,9 @@
 .leftBar{
     flex: 2;
     position: sticky;
-    top: 50px;
-    height: calc(100vh - 50px);
-    overflow: scroll;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
     background-color: $bg;
     color: $textColor;
 
@@ -37,10 +37,14 @@
                 font-size: 12px;
             }
 
-            .user{
+            .item{
                 display: flex;
                 align-items: center;
                 gap: 10px;
+                cursor: pointer;
+                border-radius: 10px;
+                font-family: 'Quicksand', sans-serif;
+                font-weight: bold;
 
                 img{
                     width: 30px;
@@ -54,17 +58,18 @@
                 }
             }
 
-            .item{
+            .link{
                 display: flex;
                 align-items: center;
+                width: 100%;
+                height: 100%;
+                padding: 10px;
                 gap: 10px;
-                
-                img{
-                    width: 30px;
-                }
-                span{
-                    font-size: 14px;
-                }
+            }
+
+            .active {
+                background-color: $main;
+                color: white;
             }
         }
     }

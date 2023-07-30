@@ -49,7 +49,7 @@ const handleTolak = async (e, reimId) => {
 
 
   return (
-    <div className="responsive-table">
+    <div className="reimAbsenTable">
       {error ? (
         <p>Something went wrong!</p>
       ) : isLoading ? (
@@ -128,7 +128,7 @@ const handleTolak = async (e, reimId) => {
                         </tbody>
                       </table>
                     </td>
-                    <td colSpan="2">
+                    <td colSpan="2" className='img'>
                       <img src={`/invoice/` + post.invoicePic} alt="" />
                     </td>
                   </tr>

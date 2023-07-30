@@ -6,7 +6,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../context/authContext";
 import Update from "../../components/update/Update"
 import {useMutation, useQueryClient} from "@tanstack/react-query";
-import { Style } from "@mui/icons-material";
+import UpdatePswd from "../../components/updatePswd/UpdatePswd"
 
 
 
@@ -15,6 +15,7 @@ const Profile = () => {
 
     // Profile update
     const  [openUpdateProfile, setOpenUpdateProfile] = useState(false)
+    const  [openUpdatePassword, setOpenUpdatePassword] = useState(false)
 
     // Get
     const {currentUser} = useContext(AuthContext);
@@ -32,7 +33,7 @@ const Profile = () => {
         email: "",
         nama: "",
         noTelp: "",
-        univ: "",
+        instansi: "",
         jenis: "",
         tahun: "",
         domisili: "",
@@ -61,7 +62,7 @@ const Profile = () => {
         texts.email = texts.email ? texts.email : data.email;
         texts.nama = texts.nama ? texts.nama : data.nama;
         texts.noTelp = texts.noTelp ? texts.noTelp : data.noTelp;
-        texts.univ = texts.univ ? texts.univ : data.univ;
+        texts.instansi = texts.instansi ? texts.instansi : data.instansi;
         texts.jenis = texts.jenis ? texts.jenis : data.jenis;
         texts.tahun = texts.tahun ? texts.tahun : data.tahun;
         texts.domisili = texts.domisili ? texts.domisili : data.domisili;
@@ -91,13 +92,17 @@ const Profile = () => {
                       alt=""
                       className="profilePic"
                     />
-                    <button onClick={() => setOpenUpdateProfile(true)}>
-                      Ubah Gambar
-                    </button>
+                    <div className="buttonGroup">
+                      <button onClick={() => setOpenUpdateProfile(true)}>
+                        Ubah Gambar
+                      </button>
+                      <button onClick={() => setOpenUpdatePassword(true)}>
+                        Ubah Password
+                      </button>
+                    </div>
                   </div>
                   <div className="boxTitle">
                     <span className="title">Email</span>
-                    <br />
                     <input
                       type="text"
                       name="email"
@@ -107,7 +112,6 @@ const Profile = () => {
                   </div>
                   <div className="boxTitle">
                     <span className="title">Nama</span>
-                    <br />
                     <input
                       type="text"
                       name="nama"
@@ -117,7 +121,6 @@ const Profile = () => {
                   </div>
                   <div className="boxTitle">
                     <span className="title">Nomor</span>
-                    <br />
                     <input
                       type="text"
                       name="noTelp"
@@ -126,18 +129,16 @@ const Profile = () => {
                     />
                   </div>
                   <div className="boxTitle">
-                    <span className="title">Universitas</span>
-                    <br />
+                    <span className="title">Instansi</span>
                     <input
                       type="text"
-                      name="univ"
-                      placeholder={data.univ}
+                      name="instansi"
+                      placeholder={data.instansi}
                       onChange={handleChange}
                     />
                   </div>
                   <div className="boxTitle">
                     <span className="title">Jenis Magang</span>
-                    <br />
                     <input
                       type="text"
                       name="data"
@@ -147,7 +148,6 @@ const Profile = () => {
                   </div>
                   <div className="boxTitle">
                     <span className="title">Tahun Magang</span>
-                    <br />
                     <input
                       type="number"
                       name="tahun"
@@ -157,7 +157,6 @@ const Profile = () => {
                   </div>
                   <div className="boxTitle">
                     <span className="title">Alamat Domisili</span>
-                    <br />
                     <input
                       type="text"
                       name="domisili"
@@ -167,7 +166,6 @@ const Profile = () => {
                   </div>
                   <div className="boxTitle">
                     <span className="title">Nomor Rekening</span>
-                    <br />
                     <input
                       type="text"
                       name="nomor"
@@ -177,7 +175,6 @@ const Profile = () => {
                   </div>
                   <div className="boxTitle">
                     <span className="title">Nama Bank</span>
-                    <br />
                     <input
                       type="text"
                       name="bank"
@@ -187,7 +184,6 @@ const Profile = () => {
                   </div>
                   <div className="boxTitle">
                     <span className="title">Nama Rekening</span>
-                    <br />
                     <input
                       type="text"
                       name="namaRek"
@@ -195,12 +191,15 @@ const Profile = () => {
                       onChange={handleChange}
                     />
                   </div>
-                  <button onClick={handleClick}>Update</button>
+                  <button className="updateButton" onClick={handleClick}>Update</button>
                 </div>
               </div>
             </>
           )}
           {openUpdateProfile && <Update setOpenUpdate={setOpenUpdateProfile} user={data} />}
+          {openUpdatePassword && <UpdatePswd setOpenUpdate={setOpenUpdatePassword} user={data} />}
+          {(openUpdateProfile) && (<div className="blackBg" onClick={()=>setOpenUpdateProfile(!openUpdateProfile)} />)}
+          {(openUpdatePassword) && (<div className="blackBg" onClick={()=>setOpenUpdatePassword(!openUpdatePassword)} />)}
         </div>
 
     )

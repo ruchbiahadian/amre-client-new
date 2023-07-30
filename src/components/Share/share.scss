@@ -1,14 +1,20 @@
 @import "../../style.scss";
 
-.share{
-        box-shadow: 1px 6px 17px 1px rgba(0,0,0,0.09);
-        -webkit-box-shadow: 1px 6px 17px 1px rgba(0,0,0,0.09);
-        -moz-box-shadow: 1px 6px 17px 1px rgba(0,0,0,0.09);
+.sharee{
+
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            max-width: 50%;
+            max-height: fit-content;
+            z-index: 999;
+
         border-radius: 20px;
-        background-color: themed("bg");
-        color: themed("textColor");
-        margin-bottom: 50px;
-        width: 80%;
+        background-color: $bg;
+        color: $textColor;
 
         .container{
             padding: 20px;
@@ -35,7 +41,7 @@
                     input{
                         width: 100%;
                         border: none;
-                        color: themed("textColor");
+                        color: $textColor;
                         background-color: transparent;
                         padding: 20px 0;
                     }
@@ -58,7 +64,7 @@
             hr{
                 margin-top: 30px;
                 margin-bottom: 10px;
-                border-bottom: 1px solid themed("border");
+                border-bottom: 1px solid $border;
             }
             
             .bottom{
@@ -77,11 +83,12 @@
                 }
                 .right{
                     button{
-                    border: none;
-                    padding: 5px;
-                    color: white;
-                    cursor: pointer;
-                    background-color: #5271ff;
+                        border: none;
+                        padding: 10px;
+                        border-radius: 5px;
+                        background-color: $main;
+                        color: white;
+                        cursor: pointer;
                    }
                 }
             }

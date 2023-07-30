@@ -5,7 +5,7 @@ import {AuthContext} from "../../context/authContext";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {makeRequest} from "../../axios";
 
-const AddAcara = () =>{
+const AddAcara = ({setAddOpen}) =>{
 
     const {currentUser} = useContext(AuthContext)
 
@@ -48,12 +48,13 @@ const AddAcara = () =>{
 
         mutation.mutate({...texts})
 
+        setAddOpen(false)
         setTexts("")
         resetForm();
     }
 
     return (
-        <div className="share">
+        <div className="addAcara">
           <div className="container">
                 <form ref={formRef}>
                   <div className="item">

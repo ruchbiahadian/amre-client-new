@@ -15,22 +15,21 @@ import { useContext, useState } from "react";
 const Reimbursement = () => {
     const {currentUser} = useContext(AuthContext);
 
-    
     const [selectedRow, setSelectedRow] = useState(1);
+    const [activeButton, setActiveButton] = useState(1);
 
     const handleButtonClick = (index) => {
-        
+        setActiveButton(index)
         setSelectedRow((prevIndex) => (prevIndex === index ? -1 : index));
-    };
-
+    };  
 
     return (
-        <div className="home">
+        <div className="reimMenu">
             {currentUser.role === 1 && <div className="menu">
-                <button onClick={() => handleButtonClick(1)}>Diajukan</button>
-                <button onClick={() => handleButtonClick(2)}>Disetujui</button>
-                <button onClick={() => handleButtonClick(3)}>Ditolak</button>
-                <button onClick={() => handleButtonClick(4)}>Jenis Reimbursement</button>
+                <button onClick={() => handleButtonClick(1)} className={`${activeButton === 1 ? 'active' : ''}`}>Diajukan</button>
+                <button onClick={() => handleButtonClick(2)} className={`${activeButton === 2 ? 'active' : ''}`}>Disetujui</button>
+                <button onClick={() => handleButtonClick(3)} className={`${activeButton === 3 ? 'active' : ''}`}>Ditolak</button>
+                <button onClick={() => handleButtonClick(4)} className={`${activeButton === 4 ? 'active' : ''}`}>Jenis Reimbursement</button>
             </div>}
 
             {currentUser.role !== 1 && (<AddReims />)}

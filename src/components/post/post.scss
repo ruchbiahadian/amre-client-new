@@ -1,9 +1,6 @@
 @import "../../style.scss";
 
 .post{
-        box-shadow: 1px 6px 17px 1px rgba(0,0,0,0.09);
-        -webkit-box-shadow: 1px 6px 17px 1px rgba(0,0,0,0.09);
-        -moz-box-shadow: 1px 6px 17px 1px rgba(0,0,0,0.09);
         border-radius: 20px;
         background-color: $bg;
         color: $textColor;
@@ -12,11 +9,15 @@
 
         .container{
             padding: 20px;
-     
+
             .user{
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
+
+                .clearIcon{
+                    color: red;
+                }
         
                 .userInfo{
                     display: flex;

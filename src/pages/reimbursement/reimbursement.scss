@@ -1,17 +1,30 @@
 @import "../../style.scss";
 
 
-.home{
-    background-color: $bgSoft;
-    padding: 0 100px;
-    min-height: 100%;
-    padding-top: 80px;
+.reimMenu{
+  background-color: $bgSoft;
+  padding: 80px 100px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 
-    @include mobile{
-      padding: 10px;
-    }
+  .menu{
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    
+    button{
+      background-color: white;
+      border: none;
+      padding: 8px;
+      border-radius: 5px;
+      cursor: pointer;
 
-    @include tablet{
-      padding: 20px;
+      &.active {
+        background-color: $main;
+        color: white;
+      }
+
     }
+  }
 }

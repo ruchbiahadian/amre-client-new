@@ -29,8 +29,18 @@ const AkunAllTable = () => {
 
   }
 
+  const handleReset = async (e, desc) =>{
+    e.preventDefault();
+      try{
+        await makeRequest.put("akun/resetPassword", desc)
+        alert("Password Berhasil Direset dengan email akun!") 
+    }catch(err){
+        console.log(err)
+    }
+  }
+
   return (
-    <div className="responsive-table">
+    <div className="reimAbsenTable">
       {error ? (
         <p>Something went wrong!</p>
       ) : isLoading ? (
@@ -58,6 +68,12 @@ const AkunAllTable = () => {
                   <td>{post.tahun}</td>
                   <td className="toBottom">
                     {/* Pass the row index to the onClick handler */}
+                    <button
+                      className="btnGreen"
+                      onClick={(e) => handleReset(e, post)}
+                    >
+                      Reset Password
+                    </button>
                     <button
                       className="btnRed"
                       onClick={(e) => handleHapus(e, post.id)}

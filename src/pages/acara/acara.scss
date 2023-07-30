@@ -1,11 +1,32 @@
 @import "../../style.scss";
 
 
-.home{
+.acara{
     background-color: $bgSoft;
-    padding: 0 100px;
-    min-height: 100%;
-    padding-top: 80px;
+    padding: 80px 100px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    .container{
+      display: flex;
+      flex-direction: column;
+      position: relative;
+
+      .tambah{
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-family: 'Quicksand', sans-serif;
+        font-weight: bold;
+        margin-bottom: 10px;
+        cursor: pointer;
+
+        .icon{
+          color: $main;
+        }
+      }
+    }
 
     @include mobile{
       padding: 10px;
