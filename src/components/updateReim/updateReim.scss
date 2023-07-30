@@ -1,15 +1,76 @@
-.update{
-    position: absolute;
+@import "../../style.scss";
+
+.updateReim {
+    position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     margin: auto;
-    width: 50%;
-    height: 50%;
+    max-width: 40%;
+    max-height: fit-content;
     background-color: white;
-    padding: 50px;
     z-index: 999;
-}
+    border-radius: 20px;
+    background-color: $bg;
+    color: $textColor;
 
+    .container{
+      .top{
+        padding: 20px 20px 0 20px;
 
+        form{
+          display: flex;
+          gap: 10px;
+          flex-direction: column;
+          select, input{
+            padding: 10px;
+          }
+        }
+
+        .item{
+          display: flex;
+          flex-direction: column;
+          gap: 3px;
+
+          .icon{
+            font-size: 30px;
+          }
+
+          label{
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+          }
+        }
+
+      }
+      .bottom{
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .item{
+          display: flex;
+          flex-direction: column;
+
+          img{
+            position: static;
+            align-self: center;
+            max-width: 150px;
+            max-height: 200px;
+          }
+
+          button{
+            padding: 10px;
+            color: white;
+            background-color: $main;
+            border: none;
+            border-radius: 10px;
+          }
+        }
+      }
+    }
+  }
+  

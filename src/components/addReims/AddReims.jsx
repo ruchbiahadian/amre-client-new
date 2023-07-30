@@ -1,11 +1,11 @@
 import "./addReims.scss";
-import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined';
 import { useContext, useEffect, useRef, useState } from "react";
 import {AuthContext} from "../../context/authContext";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {makeRequest} from "../../axios";
+import ReceiptIcon from '@mui/icons-material/Receipt';
 
-const AddReims = () =>{
+const AddReims = ({setAddOpen}) =>{
 
     const {currentUser} = useContext(AuthContext)
 
@@ -127,10 +127,6 @@ const AddReims = () =>{
         const checkReimInfo = await checkReim(texts.acaraId);
         
         if (parseInt(checkReimInfo[0].plafon_value) !== 0) {
-          if (parseInt(texts.nominal) > parseInt(checkReimInfo[0].plafon_value)) {
-            alert("Maksimal " + parseInt(checkReimInfo[0].plafon_value));
-            return;
-          }
         
           var totalNominalInt = parseInt(checkReimInfo[0].total_nominal);
         
@@ -158,62 +154,71 @@ const AddReims = () =>{
         texts.status = "Diajukan"
         mutation.mutate({...texts, invoicePic: imgURL})
 
+        setAddOpen(false);
         setTexts("")
         setFile(null)
         resetForm();
     }
 
     return (
-        <div className="share">
-  <div className="container">
-    <div className="top">
-      <div className="left">
-        <form ref={formRef}>
+        <div className="addReims">
+          <div className="container">
+            <div className="top">
+                <form ref={formRef}>
+                    <div className="item">
+                      <span>Jenis Reimbursement</span>
+                      <select name="jenis" onChange={handleChange}> 
+                            <option value="">Pilih Jenis Reimbursement</option>
+                            {
+                              getJenisReims.map(jns =>(
+                              <option key={jns.id} value={jns.namaJenis}>{jns.namaJenis}</option>
+                            ))
+                                      
+                            }
+                        </select>
+                    </div>
 
-          <select name="jenis" onChange={handleChange}> 
-                <option value="">Jenis Reimbursement</option>
-                {
-                  getJenisReims.map(jns =>(
-                  <option key={jns.id} value={jns.namaJenis}>{jns.namaJenis}</option>
-                ))
-                          
-                }
-            </select>
+                    <div className="item">
+                      <span>Pilih Kategori / Acara</span>
+                      <select name="kategori" onChange={handleChange}> 
+                          <option value="">Kategori / Acara</option>
+                          {
+                            getActiveAcara.map(acr =>(
+                            <option key={acr.id} value={acr.namaAcara}>{acr.namaAcara}</option>
+                          ))
+                                    
+                          }
+                      </select>
+                    </div>
 
-            <select name="kategori" onChange={handleChange}> 
-                <option value="">Kategori / Acara</option>
-                {
-                  getActiveAcara.map(acr =>(
-                  <option key={acr.id} value={acr.namaAcara}>{acr.namaAcara}</option>
-                ))
-                          
-                }
-            </select>
-          <input type="number" placeholder="nominal" name="nominal" onChange={handleChange} />
-        </form>
+                    <div className="item">
+                      <span>Nominal</span>
+                      <input type="number" placeholder="Masukkan nominal" name="nominal" onChange={handleChange} />
+                    </div>
 
-      </div>
-      <div className="right">
-        {file && <img className="file" alt="" src={URL.createObjectURL(file)} />}
-      </div>
-    </div>
-    <hr />
-    <div className="bottom">
-      <div className="left">
-        <input type="file" id="file" style={{ display: "none" }} onChange={(e) => setFile(e.target.files[0])} required />
-        <label htmlFor="file">
-          <div className="item">
-            <AddPhotoAlternateOutlinedIcon />
-            <span>Add Image</span>
+                  <div className="item">
+                      <input type="file" id="file" style={{ display: "none" }} onChange={(e) => setFile(e.target.files[0])} required />
+                      <label htmlFor="file">
+                          <span>Tambah / Ubah Invoice</span>
+                          <ReceiptIcon className="icon" />
+                      </label>
+                  </div>
+
+                  </form>
+              </div>
+
+
+
+            <div className="bottom">
+                <div className="item">
+                    {file && <img className="file" alt="" src={URL.createObjectURL(file)} />}
+                </div>
+                <div className="item">
+                    <button onClick={handleClick}>Tambah Reimbursement</button>
+                </div>
+            </div>
           </div>
-        </label>
-      </div>
-      <div className="right">
-        <button onClick={handleClick}>Share</button>
-      </div>
-    </div>
-  </div>
-</div>
+        </div>
 
     )
 

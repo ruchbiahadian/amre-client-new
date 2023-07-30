@@ -4,6 +4,7 @@ import ReimTable from "../../components/reimTable/ReimTable"
 import ReimTableDisetujui from "../../components/reimTableDisetujui/ReimTableDisetujui"
 import ReimTableDitolak from "../../components/reimTableDitolak/ReimTableDitolak"
 import ReimTableJenis from "../../components/jenisReim/JenisReim"
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 
 import "./reimbursement.scss"
@@ -17,6 +18,7 @@ const Reimbursement = () => {
 
     const [selectedRow, setSelectedRow] = useState(1);
     const [activeButton, setActiveButton] = useState(1);
+    const [addOpen, setAddOpen] = useState(false);
 
     const handleButtonClick = (index) => {
         setActiveButton(index)
@@ -32,8 +34,17 @@ const Reimbursement = () => {
                 <button onClick={() => handleButtonClick(4)} className={`${activeButton === 4 ? 'active' : ''}`}>Jenis Reimbursement</button>
             </div>}
 
-            {currentUser.role !== 1 && (<AddReims />)}
-            {currentUser.role !== 1 && (<Reims /> )}
+            <div className="containerTambah">
+                <div className="tambah" onClick={()=>setAddOpen(!addOpen)}>
+                    <div className="icon">
+                        <AddCircleIcon/>
+                    </div>
+                    Buat Pengajuan Baru
+                </div>
+            </div>
+            {addOpen && currentUser.role === 3 && (<AddReims setAddOpen={setAddOpen} />)}
+            {addOpen && currentUser.role === 3 && (<div className="blackBg" onClick={()=>setAddOpen(!addOpen)} />)}
+            {currentUser.role === 3 && (<Reims /> )}
 
 
             {selectedRow === 1 && currentUser.role === 1 && (<ReimTable /> )}

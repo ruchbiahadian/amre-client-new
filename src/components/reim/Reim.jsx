@@ -13,6 +13,8 @@ import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {makeRequest} from "../../axios";
 import { AuthContext } from "../../context/authContext";
 import UpdateReim from "../../components/updateReim/UpdateReim"
+import RemoveCircleOutlinedIcon from '@mui/icons-material/RemoveCircleOutlined';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 
 
 
@@ -20,8 +22,7 @@ const Reim = ({post}) => {
 
     const {currentUser} = useContext(AuthContext)
 
-    const [commentOpen, setCommentOpen] = useState(false);
-    const [menuOpen, setMenuOpen] = useState(false);
+    const [invOpen, setInvOpen] = useState(false);
     const [updateOpen, setUpdateOpen] = useState(false);
 
     const queryClient = useQueryClient()
@@ -39,12 +40,8 @@ const Reim = ({post}) => {
     }
  
     return (
-        <div className="invoice">
+        <div className="reim">
             <div className="container">
-                <div className="user">
-                    <button onClick={()=>setUpdateOpen(!updateOpen)}>update</button>
-                    <button onClick={handleDelete}>delete</button>
-                </div>
                 <div className="content">
                     <div className="left">
                         <p>Status: {post.status}</p>
@@ -52,22 +49,28 @@ const Reim = ({post}) => {
                         <p>Kategori / Acara: {post.kategori}</p>
                         <p>Nominal: {post.nominal}</p>
                         <p>Jenis: {post.jenis}</p>
+                    </div>
+                    <div className="right">
                         <p>Nomor Rekening: {post.nomor}</p>
                         <p>Bank: {post.bank}</p>
                         <p>Nama Rekening: {post.namaRek}</p>
-                    </div>
-                    <div className="right">
-                        <img src={"./invoice/" + post.invoicePic} alt="" />
+                        <button onClick={()=>setInvOpen(!invOpen)}>Lihat Invoice</button>
                     </div>
                 </div>
                 <div className="info">
-                    <div className="item" onClick={()=>setCommentOpen(!commentOpen)}>
-                        <TextsmsOutlinedIcon/>
-                        Komentar
+                    <div className="item" onClick={()=>setUpdateOpen(!updateOpen)}>
+                        <EditOutlinedIcon/>
+                        Update
+                    </div>
+                    <div className="item delete" onClick={handleDelete}>
+                        <RemoveCircleOutlinedIcon/>
+                        Delete
                     </div>
                 </div>
-                {commentOpen && <CommentsReims postId={post.id} />}
+                {invOpen && <img src={"./invoice/" + post.invoicePic} alt="" />}
+                {invOpen && (<div className="blackBg" onClick={()=>setInvOpen(!invOpen)} />)}
                 {updateOpen && <UpdateReim setUpdateOpen={setUpdateOpen} reim={post} />}
+                {updateOpen && (<div className="blackBg" onClick={()=>setUpdateOpen(!updateOpen)} />)}
             </div>
         </div>
     )
