@@ -1,9 +1,6 @@
 @import "../../style.scss";
 
-.invoice{
-        box-shadow: 1px 6px 17px 1px rgba(0,0,0,0.09);
-        -webkit-box-shadow: 1px 6px 17px 1px rgba(0,0,0,0.09);
-        -moz-box-shadow: 1px 6px 17px 1px rgba(0,0,0,0.09);
+.absenUser{
         border-radius: 20px;
         background-color: $bg;
         color: $textColor;
@@ -11,17 +8,22 @@
 
         .container{
             padding: 20px;
-     
-            .user{
-                display: flex;
-                gap: 10px;
-                justify-content: flex-end;
-                align-items: center;
-                padding: 10px;
+
+            img{
+                position: fixed;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: auto;
+                max-width: 30%;
+                max-height: 60%;
+                z-index: 999;
             }
 
             .content{
                 display: flex;
+                padding-bottom: 20px;
 
 
                 .left{
@@ -32,28 +34,36 @@
                     flex: 1;
                     justify-self: center;
                     align-items: center;
-                    
-                    img{
-                        max-width: 80%;
-                        object-fit: cover;
-                        display: block;
-                        margin: 0 auto;
+
+                    button{
+                        color: white;
+                        background-color: $main;
+                        padding: 10px;
+                        border-radius: 10px;
+                        border: none;
+                        cursor: pointer;
                     }
                 }
                 
             }
 
             .info{
+                border-top: 1px solid $border;
                 display: flex;
                 align-items: center;
                 gap: 20px;
+                padding: 20px 10px 0 10px;
+                justify-content: flex-end;
 
                 .item{
                     display: flex;
                     align-items: center;
-                    gap: 10px;
+                    gap: 5px;
                     cursor: pointer;
-                    font-size: 14px;
+                }
+
+                .delete{
+                    color: red;
                 }
             }
 }}

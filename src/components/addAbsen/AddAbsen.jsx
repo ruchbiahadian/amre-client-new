@@ -5,8 +5,10 @@ import { useContext, useEffect, useRef, useState } from "react";
 import {AuthContext} from "../../context/authContext";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {makeRequest} from "../../axios";
+import ReceiptIcon from '@mui/icons-material/Receipt';
+import PhotoIcon from '@mui/icons-material/AddPhotoAlternate';
 
-const AddAbsen = () =>{
+const AddAbsen = ({setAddOpen}) =>{
 
     const {currentUser} = useContext(AuthContext)
 
@@ -38,10 +40,6 @@ const AddAbsen = () =>{
       fetchAllSentra()
   }, [])
 
-
-//   const handleChange = (e) =>{
-//     setTexts((prev) =>({ ...prev, [e.target.name]: e.target.value}));
-// }; 
 
     const handleChange = (e) => {
       const { name, value } = e.target;
@@ -104,7 +102,6 @@ const AddAbsen = () =>{
         
 
           const checkAbsenInfo = await checkAbsensi(texts.acaraId);
-          console.log(checkAbsenInfo);
 
           if (checkAbsenInfo[0].created_at !== null) {
             alert("Anda sudah melakukan Absensi pada acara ini!");
@@ -115,9 +112,6 @@ const AddAbsen = () =>{
           const absenDate = moment(); 
           const maxAbsen = moment(checkAbsenInfo[0].max_absen);
           maxAbsen.set({ hour: 23, minute: 59, second: 59, millisecond: 0 });
-
-          console.log(absenDate);
-          console.log(maxAbsen);
   
           if (absenDate.isAfter(maxAbsen)) {
               alert("Batas maksimal absensi pada acara ini sudah terlewat!")
@@ -131,53 +125,53 @@ const AddAbsen = () =>{
         texts.status = "Diajukan"
         mutation.mutate({...texts, absencePic: imgURL})
 
+        setAddOpen(false)
         setTexts("")
         setFile(null)
         resetForm();
     }
 
     return (
-  <div className="share">
-    <div className="container">
-      <div className="top">
-        <div className="left">
-          <form ref={formRef}>
-              <select name="kategori" onChange={handleChange}> 
-                  <option value="">Kategori / Acara</option>
-                  {
-                    getActiveAcara.map(acr =>(
-                    <option key={acr.id} value={acr.namaAcara}>{acr.namaAcara}</option>
-                  ))
-                            
-                  }
-              </select>
-          </form>
+      <div className="addAbsen">
+        <div className="container">
+          <div className="top">
+              <form ref={formRef}>
+                  <div className="item">
+                    <span>Pilih Kategori / Acara</span>
+                    <select name="kategori" onChange={handleChange}> 
+                        <option value="">Kategori / Acara</option>
+                        {
+                          getActiveAcara.map(acr =>(
+                          <option key={acr.id} value={acr.namaAcara}>{acr.namaAcara}</option>
+                        ))
+                                  
+                        }
+                    </select>
+                  </div>
 
-        </div>
-        <div className="right">
-          {file && <img className="file" alt="" src={URL.createObjectURL(file)} />}
-        </div>
-      </div>
-      <hr />
-      <div className="bottom">
-        <div className="left">
-          <input type="file" id="file" style={{ display: "none" }} onChange={(e) => setFile(e.target.files[0])} required />
-          <label htmlFor="file">
-            <div className="item">
-              <AddPhotoAlternateOutlinedIcon />
-              <span>Add Image</span>
+                <div className="item">
+                    <input type="file" id="file" style={{ display: "none" }} onChange={(e) => setFile(e.target.files[0])} required />
+                    <label htmlFor="file">
+                        <span>Tambah / Ubah bukti kehadiran</span>
+                        <PhotoIcon className="icon" />
+                    </label>
+                </div>
+
+                </form>
             </div>
-          </label>
-        </div>
-        <div className="right">
-          <button onClick={handleClick}>Share</button>
+
+          <div className="bottom">
+              <div className="item">
+                  {file && <img className="file" alt="" src={URL.createObjectURL(file)} />}
+              </div>
+              <div className="item">
+                  <button onClick={handleClick}>Tambah Absensi</button>
+              </div>
+          </div>
         </div>
       </div>
-    </div>
-</div>
 
     )
-
-}
+  }
 
 export default AddAbsen

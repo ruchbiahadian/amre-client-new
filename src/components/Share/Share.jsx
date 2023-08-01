@@ -35,6 +35,12 @@ const Share = ({setAddOpen}) =>{
 
     const handleClick = async (e) =>{
         e.preventDefault();
+
+        if(!desc && !file){
+            alert("Masukkan teks atau gambar!")
+            return;
+        }
+
         let imgURL = "";
         if (file) imgURL = await upload();
         mutation.mutate({desc, img: imgURL})

@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import './akunAllTable.scss';
+import './adminTable.scss';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { makeRequest } from '../../axios';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { Link } from 'react-router-dom';
 
-const AkunAllTable = () => {
+const AdminTable = () => {
 
   const { isLoading, error, data } = useQuery(['posts'], () =>
-    makeRequest.get('akun/getDaftarAkun').then((res) => {
+    makeRequest.get('akun/getDaftarAdmin').then((res) => {
       return res.data;
     })
   );
@@ -53,8 +53,6 @@ const AkunAllTable = () => {
               <th>No</th>
               <th>Email</th>
               <th>Nama</th>
-              <th>Jenis Magang</th>
-              <th>Tahun Magang</th>
               <th>Aksi</th>
             </tr>
           </thead>
@@ -69,8 +67,6 @@ const AkunAllTable = () => {
                       <span className="name">{post.nama}</span>
                     </Link>
                   </td>
-                  <td>{post.jenis}</td>
-                  <td>{post.tahun}</td>
                   <td className="toBottom">
                     {/* Pass the row index to the onClick handler */}
                     <button
@@ -96,4 +92,4 @@ const AkunAllTable = () => {
   );
 };
 
-export default AkunAllTable;
+export default AdminTable;

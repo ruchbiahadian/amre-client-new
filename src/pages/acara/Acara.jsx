@@ -18,9 +18,9 @@ const Acara = () => {
                     </div>
                     Buat Acara Baru
                 </div>
-                {addOpen && currentUser.role === 1 && (<AddAcara setAddOpen={setAddOpen} />)}
-                {addOpen && currentUser.role === 1 && (<div className="blackBg" onClick={()=>setAddOpen(!addOpen)} />)}
-                {currentUser.role === 1 && (<AcaraTable/>)}
+                {addOpen && currentUser.role !== 3 && (<AddAcara setAddOpen={setAddOpen} />)}
+                {addOpen && currentUser.role !== 3 && (<div className="blackBg" onClick={()=>setAddOpen(!addOpen)} />)}
+                {currentUser.role !== 3 && (<AcaraTable/>)}
             </div>
         </div>
     )

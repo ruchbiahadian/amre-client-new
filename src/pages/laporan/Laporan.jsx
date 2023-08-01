@@ -45,25 +45,40 @@ const Laporan = () => {
         setTexts(0)
       }
 
+      const [activeButton, setActiveButton] = useState(1);
+      const [selectedRow, setSelectedRow] = useState(1);
+
+      const handleButtonClick = (index) => {
+        setActiveButton(index)
+        setSelectedRow((prevIndex) => (prevIndex === index ? -1 : index));
+    };
+
     return (
-        <div className="home">
-            {currentUser.role === 1 && <div className="menu">
-                <select name="kategori" onChange={handleChange}> 
-                    <option value="">Kategori / Acara</option>
-                    {
-                    getNonctiveAcara.map(acr =>(
-                    <option key={acr.id} value={acr.namaAcara}>{acr.namaAcara}</option>
-                    ))
-                            
-                    }
-                </select>
-                <button onClick={handleClickReset}>Reset</button>
+        <div className="laporan">
+
+            <div className="menu">
+                    {currentUser.role !== 3 && <button onClick={() => handleButtonClick(1)} className={`${activeButton === 1 ? 'active' : ''}`}>Reimbursement</button>}
+                    {currentUser.role !== 3 && <button onClick={() => handleButtonClick(2)} className={`${activeButton === 2 ? 'active' : ''}`}>Absensi</button>}
+            </div>
+
+            {(selectedRow === 1 && currentUser.role !== 3) && 
+            <div className="konten">
+                <div className="pilihAcara">
+                    <select name="kategori" onChange={handleChange}> 
+                        <option value="">Pilih Kategori / Acara</option>
+                        {
+                        getNonctiveAcara.map(acr =>(
+                        <option key={acr.id} value={acr.namaAcara}>{acr.namaAcara}</option>
+                        ))
+                                
+                        }
+                    </select>
+                    <button onClick={handleClickReset}>Reset</button>
+                </div>
             </div>}
 
-            {texts.acaraId > 0 && <LaporanTable acaraId={texts.acaraId} />}
+            {(selectedRow === 1 && texts.acaraId > 0) && <LaporanTable acaraId={texts.acaraId} />}
 
-            
-            
         </div>
     )
 }

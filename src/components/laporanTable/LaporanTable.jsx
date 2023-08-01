@@ -20,7 +20,7 @@ const LaporanTable = ({acaraId}) => {
   };
   
   return (
-    <div className="responsive-table">
+    <div className="reimAbsenTable">
       <button onClick={togglePDFGeneration}>Generate PDF</button>
       {error ? (
         <p>Something went wrong!</p>
@@ -32,11 +32,11 @@ const LaporanTable = ({acaraId}) => {
             <tr>
               <th>No</th>
               <th>Nama</th>
-              <th>Total Reimbursement</th>
-              <th>Kategori / Acara</th>
+              <th>Total</th>
+              <th>Acara</th>
               <th>Nomor Rekening</th>
               <th>Bank</th>
-              <th>Status Reimbursement</th>
+              <th style={{textAlign: "left"}}>Status</th>
             </tr>
           </thead>
           <tbody>

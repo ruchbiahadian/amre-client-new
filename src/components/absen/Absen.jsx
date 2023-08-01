@@ -1,18 +1,11 @@
-import { Link } from "react-router-dom"
 import "./absen.scss"
-import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
-import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
-import TextsmsOutlinedIcon from '@mui/icons-material/TextsmsOutlined';
-import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
-import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
-import Comments from "../comments/Comments";
-import CommentsReims from "../commentsReims/CommentsReims";
 import { useContext, useState } from "react";
-import moment from "moment"
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {makeRequest} from "../../axios";
 import { AuthContext } from "../../context/authContext";
 import UpdateAbsen from "../../components/updateAbsen/UpdateAbsen"
+import RemoveCircleOutlinedIcon from '@mui/icons-material/RemoveCircleOutlined';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 
 
 
@@ -20,9 +13,8 @@ const Absen = ({post}) => {
 
     const {currentUser} = useContext(AuthContext)
 
-    const [commentOpen, setCommentOpen] = useState(false);
-    const [menuOpen, setMenuOpen] = useState(false);
     const [updateOpen, setUpdateOpen] = useState(false);
+    const [invOpen, setInvOpen] = useState(false);
 
     const queryClient = useQueryClient()
 
@@ -39,30 +31,34 @@ const Absen = ({post}) => {
     }
  
     return (
-        <div className="invoice">
+        <div className="absenUser">
             <div className="container">
-                <div className="user">
-                    <button onClick={()=>setUpdateOpen(!updateOpen)}>update</button>
-                    <button onClick={handleDelete}>delete</button>
-                </div>
                 <div className="content">
                     <div className="left">
                         <p>Status: {post.status}</p>
                         <p>Tanggal Absensi: {(() => new Date(post.createdAt).toLocaleDateString('en-GB'))()}</p>
-                        <p>Acara: {post.kategori}</p>
                     </div>
                     <div className="right">
-                        <img src={"./absence/" + post.absencePic} alt="" />
+                        <p>Acara: {post.kategori}</p>
+                        <button onClick={()=>setInvOpen(!invOpen)}>Lihat Bukti Absensi</button>
                     </div>
                 </div>
+                {post.status !== "Disetujui" && 
                 <div className="info">
-                    <div className="item" onClick={()=>setCommentOpen(!commentOpen)}>
-                        <TextsmsOutlinedIcon/>
-                        Komentar
+                    <div className="item" onClick={()=>setUpdateOpen(!updateOpen)}>
+                        <EditOutlinedIcon/>
+                        Update
+                    </div>
+                    <div className="item delete" onClick={handleDelete}>
+                        <RemoveCircleOutlinedIcon/>
+                        Delete
                     </div>
                 </div>
-                {commentOpen && <CommentsReims postId={post.id} />}
+                }
+                {invOpen && <img src={"./absence/" + post.absencePic} alt="" />}
+                {invOpen && (<div className="blackBg" onClick={()=>setInvOpen(!invOpen)} />)}
                 {updateOpen && <UpdateAbsen setUpdateOpen={setUpdateOpen} reim={post} />}
+                {updateOpen && (<div className="blackBg" onClick={()=>setUpdateOpen(!updateOpen)} />)}
             </div>
         </div>
     )

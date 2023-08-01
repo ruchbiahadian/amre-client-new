@@ -48,7 +48,7 @@ const Post = ({post}) => {
                             <span className="date">{moment(post.createdAt).fromNow()}</span>
                         </div>
                     </div>
-                    {post.userId === currentUser.id &&  <RemoveCircleOutlinedIcon className="clearIcon" onClick={handleDelete} />}
+                    {(post.userId === currentUser.id || currentUser.role === 1) &&  <RemoveCircleOutlinedIcon className="clearIcon" onClick={handleDelete} />}
                 </div>
                 <div className="content">
                     <p>{post.desc}</p>

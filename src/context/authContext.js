@@ -35,7 +35,6 @@ export const AuthContextProvider = ({ children }) => {
     if (typeof localStorage !== "undefined") {
       localStorage.removeItem("user");
     }
-    setCurrentUser(null);
   };
 
   const updateCurrentUser = (data) => {

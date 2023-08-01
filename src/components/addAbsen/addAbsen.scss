@@ -1,67 +1,72 @@
 @import "../../style.scss";
 
-.share {
+.addAbsen {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    max-width: 40%;
+    max-height: fit-content;
     background-color: white;
+    z-index: 999;
+    border-radius: 20px;
+    background-color: $bg;
+    color: $textColor;
 
-    .container {
-      .top {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        
-        .left {
+    .container{
+      .top{
+        padding: 20px 20px 0 20px;
+
+        form{
           display: flex;
-          align-items: center;
-          
-          img {
-            margin-right: 10px;
-          }
-          
-          input {
-            margin-right: 10px;
-            
-            &:last-child {
-              margin-right: 0;
-            }
+          gap: 10px;
+          flex-direction: column;
+          select, input{
+            padding: 10px;
           }
         }
-      }
-      
-      hr {
-        margin: 20px 0;
-        border: none;
-        border-top: 1px solid #ccc;
-      }
-      
-      .bottom {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        
-        .left {
-          .item {
+
+        .item{
+          display: flex;
+          flex-direction: column;
+          gap: 3px;
+
+          .icon{
+            font-size: 30px;
+          }
+
+          label{
             display: flex;
-            align-items: center;
+            flex-direction: column;
             cursor: pointer;
-            
-            svg {
-              margin-right: 5px;
-            }
           }
         }
-        
-        .right {
-          button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
+
+      }
+      .bottom{
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .item{
+          display: flex;
+          flex-direction: column;
+
+          img{
+            align-self: center;
+            max-width: 150px;
+            max-height: 200px;
+          }
+
+          button{
+            padding: 10px;
+            color: white;
+            background-color: $main;
             border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            
-            &:hover {
-              background-color: #0056b3;
-            }
+            border-radius: 10px;
           }
         }
       }

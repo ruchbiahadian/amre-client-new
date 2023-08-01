@@ -27,30 +27,33 @@ const Reimbursement = () => {
 
     return (
         <div className="reimMenu">
-            {currentUser.role === 1 && <div className="menu">
+            {currentUser.role !== 3 && <div className="menu">
                 <button onClick={() => handleButtonClick(1)} className={`${activeButton === 1 ? 'active' : ''}`}>Diajukan</button>
                 <button onClick={() => handleButtonClick(2)} className={`${activeButton === 2 ? 'active' : ''}`}>Disetujui</button>
                 <button onClick={() => handleButtonClick(3)} className={`${activeButton === 3 ? 'active' : ''}`}>Ditolak</button>
                 <button onClick={() => handleButtonClick(4)} className={`${activeButton === 4 ? 'active' : ''}`}>Jenis Reimbursement</button>
             </div>}
 
-            <div className="containerTambah">
-                <div className="tambah" onClick={()=>setAddOpen(!addOpen)}>
-                    <div className="icon">
-                        <AddCircleIcon/>
+            {currentUser.role === 3 && 
+                <div className="containerTambah">
+                    <div className="tambah" onClick={()=>setAddOpen(!addOpen)}>
+                        <div className="icon">
+                            <AddCircleIcon/>
+                        </div>
+                        Buat Pengajuan Baru
                     </div>
-                    Buat Pengajuan Baru
                 </div>
-            </div>
+            }
+            
             {addOpen && currentUser.role === 3 && (<AddReims setAddOpen={setAddOpen} />)}
             {addOpen && currentUser.role === 3 && (<div className="blackBg" onClick={()=>setAddOpen(!addOpen)} />)}
             {currentUser.role === 3 && (<Reims /> )}
 
 
-            {selectedRow === 1 && currentUser.role === 1 && (<ReimTable /> )}
-            {selectedRow === 2 && currentUser.role === 1 && (<ReimTableDisetujui /> )}
-            {selectedRow === 3 && currentUser.role === 1 && (<ReimTableDitolak/> )}
-            {selectedRow === 4 && currentUser.role === 1 && (<ReimTableJenis/> )}
+            {selectedRow === 1 && currentUser.role !== 3 && (<ReimTable /> )}
+            {selectedRow === 2 && currentUser.role !== 3 && (<ReimTableDisetujui /> )}
+            {selectedRow === 3 && currentUser.role !== 3 && (<ReimTableDitolak/> )}
+            {selectedRow === 4 && currentUser.role !== 3 && (<ReimTableJenis/> )}
 
             {/* {currentUser.role === 1 && (<R(<ReimTable /> eimTable /> )} */}
             

@@ -64,10 +64,10 @@ const JenisReim = () => {
           <div className="icon">
               <AddCircleIcon/>
           </div>
-          Buat Acara Baru
+          Tambah Jenis Reimbursement
        </div>
 
-       {addOpen && currentUser.role === 1 && 
+       {addOpen && currentUser.role !== 3 && 
        <div className="input">
           <input type="text" placeholder='Tambah Jenis Reimbursement' onChange={(e) => setTexts(e.target.value)} />
           <button onClick={handleClick}>Tambah</button>

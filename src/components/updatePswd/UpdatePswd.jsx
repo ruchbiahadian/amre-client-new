@@ -18,7 +18,7 @@ const UpdatePswd = ({setOpenUpdate, user}) =>{
         passwordLama: "", 
         passwordBaru: "", 
         passwordBaru2: "",
-        id: user.userId
+        id: user.id
     });
 
     const handleChange = (e) =>{

@@ -62,7 +62,7 @@ const UpdatePost = ({setUpdateOpen, reim}) =>{
 
 return (
         <div className="updateAcara">
-          <div className="container">
+          <div className="containerAcara">
                 <form ref={formRef}>
                   <div className="item">
                         <span>Nama Acara</span>

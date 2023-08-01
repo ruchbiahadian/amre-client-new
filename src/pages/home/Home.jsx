@@ -13,7 +13,7 @@ const Home = () => {
     return (
         <div className="homee">
             <div className="container">
-                {currentUser.role === 1 &&
+                {currentUser.role !== 3 &&
                     <div className="tambah" onClick={()=>setAddOpen(!addOpen)}>
                         <div className="icon">
                             <AddCircleIcon/>
@@ -21,8 +21,8 @@ const Home = () => {
                         Buat berita baru
                     </div>
                 }
-                {addOpen && currentUser.role === 1 && (<Share setAddOpen={setAddOpen} />)}
-                {addOpen && currentUser.role === 1 && (<div className="blackBg" onClick={()=>setAddOpen(!addOpen)} />)}
+                {addOpen && currentUser.role !== 3 && (<Share setAddOpen={setAddOpen} />)}
+                {addOpen && currentUser.role !== 3 && (<div className="blackBg" onClick={()=>setAddOpen(!addOpen)} />)}
                 <Posts/> 
             </div>
         </div>

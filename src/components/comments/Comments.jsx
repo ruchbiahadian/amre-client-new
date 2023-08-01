@@ -45,9 +45,9 @@ const Comments = ({postId}) =>{
         <div className="comments">
             <div className="write">
                 <img src={`/profile/` + currentUser.profilePic} alt="" />
-                <input type="text" placeholder="write a comment" 
+                <input type="text" placeholder="Tulis Komentar" 
                 value={desc} onChange={e => setDesc(e.target.value)} />
-                <button onClick={handleClick} >Send</button>
+                <button onClick={handleClick} >Kirim</button>
             </div>
             {
                 error ? "Something went wrong!" 

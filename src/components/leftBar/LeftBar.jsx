@@ -30,10 +30,9 @@ const LeftBar = () =>{
         e.preventDefault();
 
         try{
-            await makeRequest.post("/auth/logout", {}, {withCredentials: true});
             await logout();
-            alert("Anda berhasil logout!");
-            Navigate("/login");
+            await makeRequest.post("/auth/logout", {}, {withCredentials: true});
+            window.location.reload();
         }catch(err){
             console.log(err)
         }
@@ -62,7 +61,7 @@ const LeftBar = () =>{
                             <span className="name">Berita</span>
                         </Link>
                     </div>
-                    {currentUser.role === 1 &&
+                    {currentUser.role !== 3 &&
                         <div className={`item ${activeButton === 3 ? 'active' : ''}`} onClick={() => handleMenu(3)} >
                             <Link to="/acara" style={{textDecoration: "none", color: "inherit"}} className="link">
                                 <EventIcon/>
@@ -82,7 +81,7 @@ const LeftBar = () =>{
                             <span>Absensi</span>
                         </Link>
                     </div>
-                    {currentUser.role === 1 &&
+                    {currentUser.role !== 3 &&
                         <div className={`item ${activeButton === 6 ? 'active' : ''}`} onClick={() => handleMenu(6)}>
                             <Link to="/laporan" style={{textDecoration: "none", color: "inherit"}} className="link">
                                 <PrintIcon/>
@@ -90,7 +89,7 @@ const LeftBar = () =>{
                             </Link>
                         </div>
                     }
-                    {currentUser.role === 1 &&
+                    {currentUser.role !== 3 &&
                         <div className={`item ${activeButton === 7 ? 'active' : ''}`} onClick={() => handleMenu(7)}>
                             <Link to="/akun" style={{textDecoration: "none", color: "inherit"}} className="link">
                                 <PeopleIcon/>

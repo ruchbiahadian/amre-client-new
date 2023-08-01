@@ -111,7 +111,7 @@ const UpdateReim = ({setUpdateOpen, reim}) =>{
 
     return (
         <div className="updateReim">
-          <div className="container">
+          <div className="containerReim">
             <div className="top">
                 <form>
                     <div className="item">

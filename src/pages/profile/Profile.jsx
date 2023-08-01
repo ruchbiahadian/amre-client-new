@@ -1,12 +1,13 @@
 import "./profile.scss"
 import {useQuery} from '@tanstack/react-query'
 import { makeRequest } from "../../axios";
-import { useLocation } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useLocation, useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/authContext";
 import Update from "../../components/update/Update"
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import UpdatePswd from "../../components/updatePswd/UpdatePswd"
+import GetRekening from "../../components/getRekening/GetRekening";
 
 
 
@@ -16,17 +17,49 @@ const Profile = () => {
     // Profile update
     const  [openUpdateProfile, setOpenUpdateProfile] = useState(false)
     const  [openUpdatePassword, setOpenUpdatePassword] = useState(false)
+    const  [openGetRekening, setOpenGetRekening] = useState(false)
 
     // Get
     const {currentUser} = useContext(AuthContext);
 
-    const userId = parseInt(useLocation().pathname.split("/")[2]);
+    // const userId = parseInt(useLocation().pathname.split("/")[2]);
+    const { id: userId } = useParams();
 
-    const { isLoading, error, data } = useQuery(["user"], () =>
-        makeRequest.get("/users/find/" + userId).then((res)=>{
-            return res.data;
+    // const { isLoading, error, data } = useQuery(
+    //   ["user"],
+    //   () =>
+    //     makeRequest
+    //       .get(currentUser.role === 3 ? "/users/find/" + userId : "/users/find/admin/" + userId)
+    //       .then((res) => res.data)
+    // ); 
+
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [data, setData] = useState(null);
+
+    const fetchData = (currentUser, userId) => {
+      const url = currentUser.role === 3
+        ? `/users/find/${userId}`
+        : `/users/find/admin/${userId}`;
+    
+      return makeRequest.get(url)
+        .then((res) => res.data)
+        .catch((error) => {
+          throw error;
+        });
+    };
+
+    useEffect(() => {
+      fetchData(currentUser, userId)
+        .then((data) => {
+          setData(data);
+          setIsLoading(false);
         })
-    );
+        .catch((error) => {
+          setError(error);
+          setIsLoading(false);
+        });
+    }, [currentUser, userId]);
 
     // Update
     const [texts, setTexts] = useState({
@@ -39,8 +72,10 @@ const Profile = () => {
         domisili: "",
         nomor: "",
         bank: "",
-        namaRek: ""
+        namaRek: "",
+        role: currentUser.role,
     });
+
 
     const queryClient = useQueryClient()
 
@@ -92,14 +127,26 @@ const Profile = () => {
                       alt=""
                       className="profilePic"
                     />
-                    <div className="buttonGroup">
-                      <button onClick={() => setOpenUpdateProfile(true)}>
-                        Ubah Gambar
-                      </button>
-                      <button onClick={() => setOpenUpdatePassword(true)}>
-                        Ubah Password
-                      </button>
-                    </div>
+                    {currentUser.id == userId &&
+                      <div className="buttonGroup">
+                          <button onClick={() => setOpenUpdateProfile(true)}>
+                            Ubah Gambar
+                          </button>
+                          <button onClick={() => setOpenUpdatePassword(true)}>
+                            Ubah Password
+                          </button>
+                      </div>
+                    }
+                    {data.role === 3 && currentUser !== 3 &&
+                      <div className="buttonGroup">
+                          <button onClick={() => setOpenGetRekening(true)}>
+                            Informasi rekening
+                          </button>
+                      </div>
+                    }
+
+                    {openGetRekening && <GetRekening id={data.id} />}
+                    {openGetRekening && (<div className="blackBg" onClick={()=>setOpenGetRekening(!openGetRekening)} />)}
                   </div>
                   <div className="boxTitle">
                     <span className="title">Email</span>
@@ -120,7 +167,7 @@ const Profile = () => {
                     />
                   </div>
                   <div className="boxTitle">
-                    <span className="title">Nomor</span>
+                    <span className="title">Nomor Telepon</span>
                     <input
                       type="text"
                       name="noTelp"
@@ -138,7 +185,8 @@ const Profile = () => {
                     />
                   </div>
                   <div className="boxTitle">
-                    <span className="title">Jenis Magang</span>
+                    {currentUser.role === 3 && <span className="title">Jenis Magang</span>}
+                    {currentUser.role !== 3 && <span className="title">Divisi</span>}
                     <input
                       type="text"
                       name="data"
@@ -147,7 +195,8 @@ const Profile = () => {
                     />
                   </div>
                   <div className="boxTitle">
-                    <span className="title">Tahun Magang</span>
+                  {currentUser.role === 3 && <span className="title">Tahun Magang</span>}
+                  {currentUser.role !== 3 && <span className="title">Tahun Masuk Perusahaan</span>}
                     <input
                       type="number"
                       name="tahun"
@@ -164,34 +213,43 @@ const Profile = () => {
                       onChange={handleChange}
                     />
                   </div>
-                  <div className="boxTitle">
-                    <span className="title">Nomor Rekening</span>
-                    <input
-                      type="text"
-                      name="nomor"
-                      placeholder={data.nomor}
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div className="boxTitle">
-                    <span className="title">Nama Bank</span>
-                    <input
-                      type="text"
-                      name="bank"
-                      placeholder={data.bank}
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div className="boxTitle">
-                    <span className="title">Nama Rekening</span>
-                    <input
-                      type="text"
-                      name="namaRek"
-                      placeholder={data.namaRek}
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <button className="updateButton" onClick={handleClick}>Update</button>
+                  {currentUser.role === 3 &&
+                    <div className="boxTitle">
+                      <span className="title">Nomor Rekening</span>
+                      <input
+                        type="text"
+                        name="nomor"
+                        placeholder={data.nomor}
+                        onChange={handleChange}
+                      />
+                    </div>
+                  }
+
+                  {currentUser.role === 3 &&
+                    <div className="boxTitle">
+                      <span className="title">Nama Bank</span>
+                      <input
+                        type="text"
+                        name="bank"
+                        placeholder={data.bank}
+                        onChange={handleChange}
+                      />
+                    </div>
+                  }
+                  {currentUser.role === 3 &&
+                    <div className="boxTitle">
+                        <span className="title">Nama Rekening</span>
+                        <input
+                          type="text"
+                          name="namaRek"
+                          placeholder={data.namaRek}
+                          onChange={handleChange}
+                        />
+                    </div>
+                  }
+                  {currentUser.id == userId &&
+                      <button className="updateButton" onClick={handleClick}>Update</button>
+                  }
                 </div>
               </div>
             </>

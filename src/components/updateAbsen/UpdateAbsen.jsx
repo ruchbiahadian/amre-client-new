@@ -3,6 +3,7 @@ import "./updateAbsen.scss"
 import {makeRequest} from "../../axios";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import { AuthContext } from "../../context/authContext";
+import PhotoIcon from '@mui/icons-material/AddPhotoAlternate';
 
 const UpdateAbsen = ({setUpdateOpen, reim}) =>{
     
@@ -12,7 +13,7 @@ const UpdateAbsen = ({setUpdateOpen, reim}) =>{
 
     const [texts, setTexts] = useState({
         status: "",
-        kategori: ""
+        kategori:reim.kategori
     });
     const [getActiveAcara, setActiveAcara] = useState([])
 
@@ -69,30 +70,48 @@ const UpdateAbsen = ({setUpdateOpen, reim}) =>{
         setUpdateOpen(false)
     }
 
-    return(
-        <div className="update">
-            Update
-            <button onClick={()=>setUpdateOpen(false)}>X</button>
-            
-            <form action="">
-               <input type="file" onChange={e=>setProfile(e.target.files[0])}/> 
-
-                 <form>
-                    <select name="kategori" onChange={handleChange}> 
-                        <option value="">Kategori / Acara</option>
-                        {
+    return (
+        <div className="updateAbsensi">
+          <div className="containerUpdateAbsensi">
+            <div className="top">
+                <form>
+                    <div className="item">
+                      <span>Pilih Kategori / Acara</span>
+                      <select name="kategori" onChange={handleChange} value={texts.kategori} disabled> 
+                          <option value="">Kategori / Acara</option>
+                          {
                             getActiveAcara.map(acr =>(
                             <option key={acr.id} value={acr.namaAcara}>{acr.namaAcara}</option>
-                        ))
+                          ))
                                     
-                        }
-                    </select>
-                </form>
-
-               <button onClick={handleClick}>Update</button>
-            </form>
+                          }
+                      </select>
+                    </div>
+  
+                  <div className="item">
+                      <input type="file" id="file" style={{ display: "none" }} onChange={e=>setProfile(e.target.files[0])} />
+                      <label htmlFor="file">
+                          <span>Tambah / Ubah bukti kehadiran</span>
+                          <PhotoIcon className="icon" />
+                      </label>
+                  </div>
+  
+                  </form>
+              </div>
+  
+            <div className="bottom">
+                <div className="item">
+                {!profile && <img alt="" src={`absence/${reim.absencePic}`} />}
+                    {profile && <img className="file" alt="" src={URL.createObjectURL(profile)} />}
+                </div>
+                <div className="item">
+                    <button onClick={handleClick}>Ubah Absensi</button>
+                </div>
+            </div>
+          </div>
         </div>
-    )
+  
+      )
 }
 
 export default UpdateAbsen

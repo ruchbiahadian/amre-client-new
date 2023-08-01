@@ -1,14 +1,5 @@
-import { Link } from "react-router-dom"
 import "./reim.scss"
-import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
-import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
-import TextsmsOutlinedIcon from '@mui/icons-material/TextsmsOutlined';
-import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
-import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
-import Comments from "../comments/Comments";
-import CommentsReims from "../commentsReims/CommentsReims";
 import { useContext, useState } from "react";
-import moment from "moment"
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {makeRequest} from "../../axios";
 import { AuthContext } from "../../context/authContext";
@@ -57,7 +48,8 @@ const Reim = ({post}) => {
                         <button onClick={()=>setInvOpen(!invOpen)}>Lihat Invoice</button>
                     </div>
                 </div>
-                <div className="info">
+                {post.status !== "Disetujui" && 
+                 <div className="info">
                     <div className="item" onClick={()=>setUpdateOpen(!updateOpen)}>
                         <EditOutlinedIcon/>
                         Update
@@ -66,7 +58,8 @@ const Reim = ({post}) => {
                         <RemoveCircleOutlinedIcon/>
                         Delete
                     </div>
-                </div>
+                 </div>
+                }
                 {invOpen && <img src={"./invoice/" + post.invoicePic} alt="" />}
                 {invOpen && (<div className="blackBg" onClick={()=>setInvOpen(!invOpen)} />)}
                 {updateOpen && <UpdateReim setUpdateOpen={setUpdateOpen} reim={post} />}
