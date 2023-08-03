@@ -16,9 +16,8 @@ const AddAbsen = ({setAddOpen}) =>{
 
     const [texts, setTexts] = useState({
       status: "",
-      kategori: "",
       acaraId: 0
-  });
+    });
 
     const [getActiveAcara, setActiveAcara] = useState([])
 
@@ -41,19 +40,23 @@ const AddAbsen = ({setAddOpen}) =>{
   }, [])
 
 
-    const handleChange = (e) => {
-      const { name, value } = e.target;
-      if (name === "kategori") {
-        const selectedAcara = getActiveAcara.find((acr) => acr.namaAcara === value);
-        setTexts((prev) => ({
-          ...prev,
-          [name]: value,
-          acaraId: selectedAcara ? selectedAcara.id : 0,
-        }));
-      } else {
-        setTexts((prev) => ({ ...prev, [name]: value }));
-      }
-    };
+    // const handleChange = (e) => {
+    //   const { name, value } = e.target;
+    //   if (name === "kategori") {
+    //     const selectedAcara = getActiveAcara.find((acr) => acr.namaAcara === value);
+    //     setTexts((prev) => ({
+    //       ...prev,
+    //       [name]: value,
+    //       acaraId: selectedAcara ? selectedAcara.id : 0,
+    //     }));
+    //   } else {
+    //     setTexts((prev) => ({ ...prev, [name]: value }));
+    //   }
+    // };
+
+    const handleChange = (e) =>{
+      setTexts((prev) =>({ ...prev, [e.target.name]: e.target.value}));
+    }; 
   
 
     const uploadAbsence = async ()=>{
@@ -90,7 +93,7 @@ const AddAbsen = ({setAddOpen}) =>{
     const handleClick = async (e) =>{
         e.preventDefault();
 
-        if (!texts.kategori) {
+        if (!texts.acaraId) {
             alert("Isi semua form kosong!");
             return;
           }
@@ -136,18 +139,18 @@ const AddAbsen = ({setAddOpen}) =>{
         <div className="container">
           <div className="top">
               <form ref={formRef}>
-                  <div className="item">
-                    <span>Pilih Kategori / Acara</span>
-                    <select name="kategori" onChange={handleChange}> 
-                        <option value="">Kategori / Acara</option>
-                        {
-                          getActiveAcara.map(acr =>(
-                          <option key={acr.id} value={acr.namaAcara}>{acr.namaAcara}</option>
-                        ))
-                                  
-                        }
-                    </select>
-                  </div>
+              <div className="item">
+                      <span>Pilih Kategori / Acara</span>
+                      <select name="acaraId" onChange={handleChange}> 
+                          <option value="">Kategori / Acara</option>
+                          {
+                            getActiveAcara.map(acr =>(
+                            <option key={acr.id} value={acr.id} >{acr.namaAcara}</option>
+                          ))
+                                    
+                          }
+                      </select>
+                    </div>
 
                 <div className="item">
                     <input type="file" id="file" style={{ display: "none" }} onChange={(e) => setFile(e.target.files[0])} required />

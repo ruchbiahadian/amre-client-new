@@ -137,7 +137,7 @@ const Profile = () => {
                           </button>
                       </div>
                     }
-                    {data.role === 3 && currentUser !== 3 &&
+                    {data.role === 3 && currentUser.role !== 3 &&
                       <div className="buttonGroup">
                           <button onClick={() => setOpenGetRekening(true)}>
                             Informasi rekening
@@ -185,8 +185,8 @@ const Profile = () => {
                     />
                   </div>
                   <div className="boxTitle">
-                    {currentUser.role === 3 && <span className="title">Jenis Magang</span>}
-                    {currentUser.role !== 3 && <span className="title">Divisi</span>}
+                    {data.role === 3 && <span className="title">Jenis Magang</span>}
+                    {data.role !== 3 && <span className="title">Divisi</span>}
                     <input
                       type="text"
                       name="data"
@@ -195,8 +195,8 @@ const Profile = () => {
                     />
                   </div>
                   <div className="boxTitle">
-                  {currentUser.role === 3 && <span className="title">Tahun Magang</span>}
-                  {currentUser.role !== 3 && <span className="title">Tahun Masuk Perusahaan</span>}
+                  {data.role === 3 && <span className="title">Tahun Magang</span>}
+                  {data.role !== 3 && <span className="title">Tahun Masuk Perusahaan</span>}
                     <input
                       type="number"
                       name="tahun"
@@ -213,7 +213,7 @@ const Profile = () => {
                       onChange={handleChange}
                     />
                   </div>
-                  {currentUser.role === 3 &&
+                  {data.role === 3 && currentUser.role === 3 &&
                     <div className="boxTitle">
                       <span className="title">Nomor Rekening</span>
                       <input
@@ -225,7 +225,7 @@ const Profile = () => {
                     </div>
                   }
 
-                  {currentUser.role === 3 &&
+                  {data.role === 3 && currentUser.role === 3 &&
                     <div className="boxTitle">
                       <span className="title">Nama Bank</span>
                       <input
@@ -236,7 +236,7 @@ const Profile = () => {
                       />
                     </div>
                   }
-                  {currentUser.role === 3 &&
+                  {data.role === 3 && currentUser.role === 3 &&
                     <div className="boxTitle">
                         <span className="title">Nama Rekening</span>
                         <input

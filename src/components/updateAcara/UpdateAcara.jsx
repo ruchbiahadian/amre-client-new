@@ -29,8 +29,6 @@ const UpdatePost = ({setUpdateOpen, reim}) =>{
         id: reim.id
     });
 
-    console.log(desc.maxAbsen)
-
     const handleChange = (e) =>{
         setDesc((prev) =>({ ...prev, [e.target.name]: e.target.value}));
     }; 

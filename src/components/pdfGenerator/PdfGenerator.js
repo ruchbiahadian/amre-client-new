@@ -83,7 +83,7 @@ const PdfGenerator = ({ data }) => {
                       <Text style={{ ...styles.tableCell, flex: 0.5 }}>{index + 1}</Text>
                       <Text style={styles.tableCell}>{post.nama}</Text>
                       <Text style={styles.tableCell}>{post.total_nominal}</Text>
-                      <Text style={styles.tableCell}>{post.kategori}</Text>
+                      <Text style={styles.tableCell}>{post.namaAcara}</Text>
                       <Text style={styles.tableCell}>{post.nomor}</Text>
                       <Text style={styles.tableCell}>{post.bank}</Text>
                       <Text style={styles.tableCell}>{post.rm_status}</Text>
@@ -126,7 +126,7 @@ const PdfGenerator = ({ data }) => {
                       <Text style={{ ...styles.tableCell, flex: 0.5 }}>{index + 1}</Text>
                       <Text style={styles.tableCell}>{post.nama}</Text>
                       <Text style={styles.tableCell}>{post.total_nominal}</Text>
-                      <Text style={styles.tableCell}>{post.kategori}</Text>
+                      <Text style={styles.tableCell}>{post.namaAcara}</Text>
                       <Text style={styles.tableCell}>{post.nomor}</Text>
                       <Text style={styles.tableCell}>{post.bank}</Text>
                       <Text style={styles.tableCell}>{post.rm_status}</Text>

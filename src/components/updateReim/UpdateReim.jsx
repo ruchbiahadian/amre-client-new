@@ -13,37 +13,51 @@ const UpdateReim = ({setUpdateOpen, reim}) =>{
 
     const [texts, setTexts] = useState({
         status: reim.status,
-        kategori: reim.kategori,
         nominal: reim.nominal,
-        jenis: reim.jenis
+        jenis: reim.jenis,
+        acaraId: reim.acaraId
     });
 
     const [getJenisReims, setJenisReims] = useState([])
     const [getActiveAcara, setActiveAcara] = useState([])
 
-    useEffect(() =>{
-        const fetchAllSentra = async ()=>{
-            try {
-              const res = await makeRequest.get("/jenisReims");
-              setJenisReims(res.data);
-            } catch (err) {
-                console.log(err)
-            }
-        }
-        fetchAllSentra()
-    }, [])
+    const fetchDataReim = () => {
+      const url = `/jenisReims`;
 
-    useEffect(() =>{
-      const fetchAllSentra = async ()=>{
-          try {
-            const res = await makeRequest.get("/acara/aktif");
-            setActiveAcara(res.data);
-          } catch (err) {
-              console.log(err)
-          }
-      }
-      fetchAllSentra()
-  }, [])
+      return makeRequest.get(url)
+        .then((res) => res.data)
+        .catch((error) => {
+          throw error;
+        });
+    };
+
+    useEffect(() => {
+      fetchDataReim()
+        .then((data) => {
+          setJenisReims(data);
+        })
+        .catch((error) => {
+        });
+    },[]);
+
+    const fetchAktifAcara = () => {
+      const url = `/acara/aktif`;
+
+      return makeRequest.get(url)
+        .then((res) => res.data)
+        .catch((error) => {
+          throw error;
+        });
+    };
+
+    useEffect(() => {
+      fetchAktifAcara()
+        .then((data) => {
+          setActiveAcara(data);
+        })
+        .catch((error) => {
+        });
+    },[]);
 
     const handleChange = (e) =>{
         setTexts((prev) =>({ ...prev, [e.target.name]: e.target.value}));
@@ -83,7 +97,7 @@ const UpdateReim = ({setUpdateOpen, reim}) =>{
         e.preventDefault();
         let profileURL;
 
-        if (!texts.kategori || !texts.nominal || !texts.jenis) {
+        if (!texts.acaraId || !texts.nominal || !texts.jenis) {
             alert("Isi semua form kosong!");
             return;
           }
@@ -92,14 +106,21 @@ const UpdateReim = ({setUpdateOpen, reim}) =>{
 
           if (parseInt(checkReimInfo[0].plafon_value) !== 0) {
 
-            var totalNominalInt = parseInt(checkReimInfo[0].total_nominal);
-                if (!isNaN(totalNominalInt)) {
-                    if ((parseInt(texts.nominal) + (totalNominalInt-reim.nominal)) > parseInt(checkReimInfo[0].plafon_value)) {
-                        alert("Maksimal pengajuan reimbursement anda pada acara ini tersisa " + (parseInt(checkReimInfo[0].plafon_value) - (totalNominalInt-reim.nominal)) + " dari plafon " + parseInt(checkReimInfo[0].plafon_value));
-                        return;
-                    }
-                }
+            var totalNominalInt;
+            if(reim.status === "Diajukan"){
+              totalNominalInt= parseInt(checkReimInfo[0].total_nominal-reim.nominal);
+            }else{
+              totalNominalInt= parseInt(checkReimInfo[0].total_nominal);
             }
+        
+          
+            if (!isNaN(totalNominalInt)) {
+              if ((parseInt(texts.nominal) + totalNominalInt) > parseInt(checkReimInfo[0].plafon_value)) {
+                alert("Maksimal update pengajuan reimbursement ini, pada acara ini tersisa " + (parseInt(checkReimInfo[0].plafon_value) - totalNominalInt) + " dari plafon " + parseInt(checkReimInfo[0].plafon_value));
+                return;
+              }
+            }
+          }
           
 
         profileURL = profile ? await upload(profile) : reim.invoicePic;
@@ -129,11 +150,11 @@ const UpdateReim = ({setUpdateOpen, reim}) =>{
 
                     <div className="item">
                       <span>Pilih Kategori / Acara</span>
-                      <select name="kategori" onChange={handleChange} value={texts.kategori}> 
+                      <select name="acaraId" onChange={handleChange} value={texts.acaraId} disabled> 
                           <option value="">Kategori / Acara</option>
                           {
                             getActiveAcara.map(acr =>(
-                            <option key={acr.id} value={acr.namaAcara}>{acr.namaAcara}</option>
+                            <option key={acr.id} value={acr.id} >{acr.namaAcara}</option>
                           ))
                                     
                           }
@@ -164,7 +185,7 @@ const UpdateReim = ({setUpdateOpen, reim}) =>{
                     {profile && <img className="file" alt="" src={URL.createObjectURL(profile)} />}
                 </div>
                 <div className="item">
-                    <button onClick={handleClick}>Tambah Reimbursement</button>
+                    <button onClick={handleClick}>Update Reimbursement</button>
                 </div>
             </div>
           </div>

@@ -42,10 +42,35 @@ const ReimTableDitolak = () => {
     },
 })
 
+  const checkReim = async (acaraId)=>{
+    try{
+        const res = await makeRequest.get("/reims/checkReim/" + acaraId);
+        return res.data;
+    }catch(err){
+        console.log(err)
+    }
+  }
 
-  const handleTerima = async (e, reimId) => {
+
+  const handleTerima = async (e, reim) => {
     e.preventDefault();
-    mutationTerima.mutate({id: reimId})
+
+    const checkReimInfo = await checkReim(reim.acaraId);
+        
+    if (parseInt(checkReimInfo[0].plafon_value) !== 0) {
+    
+      var totalNominalInt = parseInt(checkReimInfo[0].total_nominal);
+    
+      if (!isNaN(totalNominalInt)) {
+        if ((parseInt(reim.nominal) + totalNominalInt) > parseInt(checkReimInfo[0].plafon_value)) {
+          alert("Maksimal pengajuan reimbursement pada acara ini tersisa " + (parseInt(checkReimInfo[0].plafon_value) - totalNominalInt) + " dari plafon " + parseInt(checkReimInfo[0].plafon_value));
+          return;
+        }
+      }
+    }
+
+
+    mutationTerima.mutate({id: reim.id})
 
 }
 
@@ -82,12 +107,12 @@ const handleHapus = async (e, reimId) => {
                     {(() => new Date(post.createdAt).toLocaleDateString('en-GB'))()}
                   </td>
                   <td>{post.nama}</td>
-                  <td>{post.kategori}</td>
+                  <td>{post.namaAcara}</td>
                   <td className="toBottom">
                     {/* Pass the row index to the onClick handler */}
                     <button
                       className="btnGreen"
-                      onClick={(e) => handleTerima(e, post.id)}
+                      onClick={(e) => handleTerima(e, post)}
                     >
                       Terima
                     </button>

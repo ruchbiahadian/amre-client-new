@@ -83,7 +83,7 @@ const handleHapus = async (e, reimId) => {
                     {(() => new Date(post.createdAt).toLocaleDateString('en-GB'))()}
                   </td>
                   <td>{post.nama}</td>
-                  <td>{post.kategori}</td>
+                  <td>{post.namaAcara}</td>
                   <td className="toBottom">
                     {/* Pass the row index to the onClick handler */}
                     <button
@@ -122,7 +122,7 @@ const handleHapus = async (e, reimId) => {
                             </tr>
                             <tr>
                               <td>Universitas:</td>
-                              <td>{post.univ}</td>
+                              <td>{post.instansi}</td>
                             </tr>
                             <tr>
                               <td>Jenis Magang:</td>

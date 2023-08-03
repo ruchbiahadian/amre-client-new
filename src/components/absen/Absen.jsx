@@ -39,7 +39,7 @@ const Absen = ({post}) => {
                         <p>Tanggal Absensi: {(() => new Date(post.createdAt).toLocaleDateString('en-GB'))()}</p>
                     </div>
                     <div className="right">
-                        <p>Acara: {post.kategori}</p>
+                        <p>Acara: {post.namaAcara}</p>
                         <button onClick={()=>setInvOpen(!invOpen)}>Lihat Bukti Absensi</button>
                     </div>
                 </div>

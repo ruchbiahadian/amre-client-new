@@ -1,0 +1,50 @@
+@import "../../style.scss";
+
+.dashboard{
+    background-color: $bgSoft;
+    padding: 80px 100px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    .container{
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        gap: 20px;
+
+        .title{
+            font-family: 'Quicksand', sans-serif;
+            font-weight: bold;
+        }
+    
+        .cards{
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+
+            .card{
+                display: flex;
+                flex: 1;
+                flex-direction: column;
+                background-color: white;
+                text-align: center;
+                border-radius: 10px;
+
+                .top{
+                    padding: 30px 10px 10px 10px;
+                    font-family: 'Quicksand', sans-serif;
+                    font-weight: bold;
+                    border-radius: 10px 10px 0 0;
+                }
+
+                .content{
+                    padding: 20px 10px 40px 10px;
+                    font-size: 40px;
+                }
+
+            }
+        }
+    }
+    
+}

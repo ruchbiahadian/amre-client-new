@@ -13,6 +13,7 @@ import PeopleIcon from '@mui/icons-material/People';
 import ReceiptIcon from '@mui/icons-material/Receipt';
 import PrintIcon from '@mui/icons-material/Print';
 import LogoutIcon from '@mui/icons-material/Logout';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 
 const LeftBar = () =>{
 
@@ -57,32 +58,38 @@ const LeftBar = () =>{
                     </div>
                     <div className={`item ${activeButton === 2 ? 'active' : ''}`} onClick={() => handleMenu(2)}>
                         <Link to="/" style={{textDecoration: "none", color: "inherit"}} className="link">
+                            <DashboardIcon />
+                            <span className="name">Dashboard</span>
+                        </Link>
+                    </div>
+                    <div className={`item ${activeButton === 3 ? 'active' : ''}`} onClick={() => handleMenu(3)}>
+                        <Link to="/berita" style={{textDecoration: "none", color: "inherit"}} className="link">
                             <ArticleIcon />
                             <span className="name">Berita</span>
                         </Link>
                     </div>
                     {currentUser.role !== 3 &&
-                        <div className={`item ${activeButton === 3 ? 'active' : ''}`} onClick={() => handleMenu(3)} >
+                        <div className={`item ${activeButton === 4 ? 'active' : ''}`} onClick={() => handleMenu(4)} >
                             <Link to="/acara" style={{textDecoration: "none", color: "inherit"}} className="link">
                                 <EventIcon/>
                                 <span>Acara</span>
                             </Link>
                         </div>
                     }
-                    <div className={`item ${activeButton === 4 ? 'active' : ''}`} onClick={() => handleMenu(4)}>
+                    <div className={`item ${activeButton === 5 ? 'active' : ''}`} onClick={() => handleMenu(5)}>
                         <Link to="/reimbursement" style={{textDecoration: "none", color: "inherit"}} className="link">
                             <PaidIcon/>
                             <span>Reimbursement</span>
                         </Link>
                     </div>
-                    <div className={`item ${activeButton === 5 ? 'active' : ''}`} onClick={() => handleMenu(5)}>
+                    <div className={`item ${activeButton === 6 ? 'active' : ''}`} onClick={() => handleMenu(6)}>
                         <Link to="/absensi" style={{textDecoration: "none", color: "inherit"}} className="link">
                             <LibraryAddCheckIcon/>
                             <span>Absensi</span>
                         </Link>
                     </div>
                     {currentUser.role !== 3 &&
-                        <div className={`item ${activeButton === 6 ? 'active' : ''}`} onClick={() => handleMenu(6)}>
+                        <div className={`item ${activeButton === 7 ? 'active' : ''}`} onClick={() => handleMenu(7)}>
                             <Link to="/laporan" style={{textDecoration: "none", color: "inherit"}} className="link">
                                 <PrintIcon/>
                                 <span>Laporan</span>
@@ -90,14 +97,14 @@ const LeftBar = () =>{
                         </div>
                     }
                     {currentUser.role !== 3 &&
-                        <div className={`item ${activeButton === 7 ? 'active' : ''}`} onClick={() => handleMenu(7)}>
+                        <div className={`item ${activeButton === 8 ? 'active' : ''}`} onClick={() => handleMenu(8)}>
                             <Link to="/akun" style={{textDecoration: "none", color: "inherit"}} className="link">
                                 <PeopleIcon/>
                                 <span>Kelola Akun</span>
                             </Link>
                         </div>
                     }
-                    <div className={`item ${activeButton === 8 ? 'active' : ''}`} >
+                    <div className={`item ${activeButton === 9 ? 'active' : ''}`} onClick={() => handleMenu(9)} >
                         <Link onClick={handleClick} style={{textDecoration: "none", color: "inherit"}} className="link">
                             <LogoutIcon/>
                             <span>Keluar</span>

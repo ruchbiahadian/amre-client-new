@@ -6,6 +6,7 @@ import Profile from "./pages/profile/Profile";
 import Reimbursement from "./pages/reimbursement/Reimbursement";
 import Absensi from "./pages/absensi/Absensi";
 import Acara from "./pages/acara/Acara";
+import Dashboard from "./pages/dashboard/Dashboard";
 import Akun from "./pages/akun/Akun";
 import Laporan from "./pages/laporan/Laporan";
 import Leftbar from "./components/leftBar/LeftBar";
@@ -65,6 +66,10 @@ function App() {
       children:[
         {
           path:"/",
+          element: <Dashboard/>
+        },
+        {
+          path:"/berita",
           element: <Home/>
         },
         {

@@ -13,12 +13,10 @@ const AddReims = ({setAddOpen}) =>{
 
     const [texts, setTexts] = useState({
         status: "",
-        kategori: "",
         nominal: "",
         jenis: "",
-        acaraId: 0
+        acaraId: null
     });
-    
 
   const [getJenisReims, setJenisReims] = useState([])
   const [getActiveAcara, setActiveAcara] = useState([])
@@ -53,23 +51,23 @@ const AddReims = ({setAddOpen}) =>{
       fetchAllSentra()
   }, [])
 
-    // const handleChange = (e) =>{
-    //     setTexts((prev) =>({ ...prev, [e.target.name]: e.target.value}));
-    // }; 
+    const handleChange = (e) =>{
+        setTexts((prev) =>({ ...prev, [e.target.name]: e.target.value}));
+    }; 
 
-    const handleChange = (e) => {
-      const { name, value } = e.target;
-      if (name === "kategori") {
-        const selectedAcara = getActiveAcara.find((acr) => acr.namaAcara === value);
-        setTexts((prev) => ({
-          ...prev,
-          [name]: value,
-          acaraId: selectedAcara ? selectedAcara.id : 0,
-        }));
-      } else {
-        setTexts((prev) => ({ ...prev, [name]: value }));
-      }
-    };
+    // const handleChange = (e) => {
+    //   const { name, value } = e.target;
+    //   if (name === "kategori") {
+    //     const selectedAcara = getActiveAcara.find((acr) => acr.namaAcara === value);
+    //     setTexts((prev) => ({
+    //       ...prev,
+    //       [name]: value,
+    //       acaraId: selectedAcara ? selectedAcara.id : 0,
+    //     }));
+    //   } else {
+    //     setTexts((prev) => ({ ...prev, [name]: value }));
+    //   }
+    // };
 
     const uploadInvoice = async ()=>{
         try{
@@ -114,7 +112,7 @@ const AddReims = ({setAddOpen}) =>{
     const handleClick = async (e) =>{
         e.preventDefault();
 
-        if (!texts.kategori || !texts.nominal || !texts.jenis) {
+        if (!texts.acaraId || !texts.nominal || !texts.jenis) {
             alert("Isi semua form kosong!");
             return;
           }
@@ -180,11 +178,11 @@ const AddReims = ({setAddOpen}) =>{
 
                     <div className="item">
                       <span>Pilih Kategori / Acara</span>
-                      <select name="kategori" onChange={handleChange}> 
+                      <select name="acaraId" onChange={handleChange}> 
                           <option value="">Kategori / Acara</option>
                           {
                             getActiveAcara.map(acr =>(
-                            <option key={acr.id} value={acr.namaAcara}>{acr.namaAcara}</option>
+                            <option key={acr.id} value={acr.id} >{acr.namaAcara}</option>
                           ))
                                     
                           }

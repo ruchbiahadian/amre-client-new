@@ -74,7 +74,7 @@ const handleTolak = async (e, reimId) => {
                     {(() => new Date(post.createdAt).toLocaleDateString('en-GB'))()}
                   </td>
                   <td>{post.nama}</td>
-                  <td>{post.kategori}</td>
+                  <td>{post.namaAcara}</td>
                   <td className="toBottom">
                     {/* Pass the row index to the onClick handler */}
                     <button

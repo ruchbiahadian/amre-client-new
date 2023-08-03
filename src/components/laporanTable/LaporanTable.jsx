@@ -46,7 +46,7 @@ const LaporanTable = ({acaraId}) => {
                 <td>{index + 1}</td>
                   <td>{post.nama}</td>
                   <td>{post.total_nominal}</td>
-                  <td>{post.kategori}</td>
+                  <td>{post.namaAcara}</td>
                   <td>{post.nomor}</td>
                   <td>{post.bank}</td>
                   <td>{post.rm_status}</td>

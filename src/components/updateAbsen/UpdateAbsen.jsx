@@ -13,8 +13,9 @@ const UpdateAbsen = ({setUpdateOpen, reim}) =>{
 
     const [texts, setTexts] = useState({
         status: "",
-        kategori:reim.kategori
+        acaraId: reim.acaraId
     });
+
     const [getActiveAcara, setActiveAcara] = useState([])
 
     useEffect(() =>{
@@ -58,11 +59,6 @@ const UpdateAbsen = ({setUpdateOpen, reim}) =>{
         e.preventDefault();
         let profileURL;
 
-        if (!texts.kategori) {
-            alert("Isi form kosong!");
-            return;
-          }
-
         profileURL = profile ? await upload(profile) : reim.absencePic;
 
         texts.status = "Diajukan";
@@ -75,13 +71,13 @@ const UpdateAbsen = ({setUpdateOpen, reim}) =>{
           <div className="containerUpdateAbsensi">
             <div className="top">
                 <form>
-                    <div className="item">
+                <div className="item">
                       <span>Pilih Kategori / Acara</span>
-                      <select name="kategori" onChange={handleChange} value={texts.kategori} disabled> 
+                      <select name="acaraId" onChange={handleChange} value={texts.acaraId} disabled> 
                           <option value="">Kategori / Acara</option>
                           {
                             getActiveAcara.map(acr =>(
-                            <option key={acr.id} value={acr.namaAcara}>{acr.namaAcara}</option>
+                            <option key={acr.id} value={acr.id} >{acr.namaAcara}</option>
                           ))
                                     
                           }
