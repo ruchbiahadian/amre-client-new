@@ -2,6 +2,7 @@ import {useNavigate} from "react-router-dom";
 import "./register.scss"
 import { useState } from "react";
 import axios from "axios";
+import { makeRequest } from "../../axios";
 
 const Register = () => {
 
@@ -30,7 +31,7 @@ const Register = () => {
           }
 
         try{
-            await axios.post("http://localhost:8800/api/auth/register", inputs);
+            await makeRequest.post("auth/register", inputs);
             alert("Pendaftaran berhasil diajukan, Tunggu persetujuan admin!");
             navigate("/login")
         }catch(err){
