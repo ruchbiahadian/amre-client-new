@@ -1,0 +1,43 @@
+@import "../../style.scss";
+
+
+.invoiceComparison{
+    background-color: $bgSoft;
+    padding: 80px 100px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    .container{
+      display: flex;
+      flex-direction: column;
+      position: relative;
+
+      .pilihAcara{
+      
+        select, button{
+          padding: 10px;
+          border-radius: 0;
+          border: none;
+        }
+  
+        button{
+          background-color: salmon;
+          color: white;
+          border-radius: 0 5px 5px 0;
+        }
+  
+        select{
+          border-radius: 5px 0 0 5px;
+        }
+      }
+    }
+
+    @include mobile{
+      padding: 10px;
+    }
+
+    @include tablet{
+      padding: 20px;
+    }
+}

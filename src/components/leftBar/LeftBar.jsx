@@ -98,13 +98,21 @@ const LeftBar = () =>{
                     }
                     {currentUser.role !== 3 &&
                         <div className={`item ${activeButton === 8 ? 'active' : ''}`} onClick={() => handleMenu(8)}>
+                            <Link to="/invoiceComparison" style={{textDecoration: "none", color: "inherit"}} className="link">
+                                <ReceiptIcon/>
+                                <span>Invoice Comparison</span>
+                            </Link>
+                        </div>
+                    }
+                    {currentUser.role !== 3 &&
+                        <div className={`item ${activeButton === 9 ? 'active' : ''}`} onClick={() => handleMenu(9)}>
                             <Link to="/akun" style={{textDecoration: "none", color: "inherit"}} className="link">
                                 <PeopleIcon/>
                                 <span>Kelola Akun</span>
                             </Link>
                         </div>
                     }
-                    <div className={`item ${activeButton === 9 ? 'active' : ''}`} onClick={() => handleMenu(9)} >
+                    <div className={`item ${activeButton === 10 ? 'active' : ''}`} onClick={() => handleMenu(10)} >
                         <Link onClick={handleClick} style={{textDecoration: "none", color: "inherit"}} className="link">
                             <LogoutIcon/>
                             <span>Keluar</span>

@@ -10,6 +10,7 @@ import Dashboard from "./pages/dashboard/Dashboard";
 import Akun from "./pages/akun/Akun";
 import Laporan from "./pages/laporan/Laporan";
 import Leftbar from "./components/leftBar/LeftBar";
+import InvoiceComparison from "./pages/Invoice Comparison/InvoiceComparison";
 import {
   createBrowserRouter,
   RouterProvider,
@@ -71,6 +72,11 @@ function App() {
         {
           path:"/berita",
           element: <Home/>
+        },
+        {
+          
+          path:"/invoiceComparison",
+          element: <InvoiceComparison/>
         },
         {
           path:"/profile/:id",

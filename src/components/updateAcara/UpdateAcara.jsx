@@ -51,8 +51,9 @@ const UpdatePost = ({setUpdateOpen, reim}) =>{
             alert("Isi semua form kosong!");
             return;
           }
+          
         
-        mutationUpdate.mutate({...desc})
+        mutationUpdate.mutate({...desc, plafonLama: reim.plafon})
         resetForm();
         setUpdateOpen(false)
     }

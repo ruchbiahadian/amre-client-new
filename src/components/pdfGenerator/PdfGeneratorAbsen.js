@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const PdfGenerator = ({ data, total }) => {
+const PdfGeneratorAbsen = ({ data }) => {
   return (
     <div>
       <PDFDownloadLink
@@ -67,37 +67,32 @@ const PdfGenerator = ({ data, total }) => {
           <Document>
             <Page size="A4" style={styles.page}>
               <View style={styles.section}>
-                <Text style={styles.header}>LAPORAN REIMBURSEMENT</Text>
+                <Text style={styles.header}>LAPORAN ABSENSI</Text>
                 <View style={styles.table}>
                   <View style={styles.tableRow}>
                     <Text style={{ ...styles.tableCellHeader, flex: 0.5 }}>No</Text>
+                    <Text style={styles.tableCellHeader}>Tanggal Absensi</Text>
+                    <Text style={styles.tableCellHeader}>Email</Text>
                     <Text style={styles.tableCellHeader}>Nama</Text>
-                    <Text style={styles.tableCellHeader}>Total</Text>
                     <Text style={styles.tableCellHeader}>Acara</Text>
-                    <Text style={styles.tableCellHeader}>Nomor Rekening</Text>
-                    <Text style={styles.tableCellHeader}>Bank</Text>
                     <Text style={styles.tableCellHeader}>Status</Text>
                   </View>
                   {data.map((post, index) => (
                     <View style={styles.tableRow} key={index}>
                       <Text style={{ ...styles.tableCell, flex: 0.5 }}>{index + 1}</Text>
+                      <Text style={styles.tableCell}>{(() => new Date(post.createdAt).toLocaleDateString('en-GB'))()}</Text>
+                      <Text style={styles.tableCell}>{post.email}</Text>
                       <Text style={styles.tableCell}>{post.nama}</Text>
-                      <Text style={styles.tableCell}>{post.total_nominal}</Text>
                       <Text style={styles.tableCell}>{post.namaAcara}</Text>
-                      <Text style={styles.tableCell}>{post.nomor}</Text>
-                      <Text style={styles.tableCell}>{post.bank}</Text>
-                      <Text style={styles.tableCell}>{post.rm_status}</Text>
+                      <Text style={styles.tableCell}>{post.status}</Text>
                     </View>
                   ))}
-                  <View style={styles.tableRow}>
-                      <Text style={styles.tableCell}>Total Nominal: {total}</Text>
-                  </View>
                 </View>
               </View>
             </Page>
           </Document>
         }
-        fileName="reimbursement.pdf"
+        fileName="absensi.pdf"
       >
         {({ loading }) => (loading ? 'Loading...' : 'Unduh Disini')}
       </PDFDownloadLink>
@@ -105,4 +100,4 @@ const PdfGenerator = ({ data, total }) => {
   );
 };
 
-export default PdfGenerator;
+export default PdfGeneratorAbsen;

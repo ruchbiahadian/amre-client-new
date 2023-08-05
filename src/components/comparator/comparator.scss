@@ -1,0 +1,31 @@
+@import "../../style.scss";
+
+.comparator{
+
+    button{
+        background-color: $main;
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        margin-top: 20px;
+    }
+
+    .image-gallery{
+        width: 100%;
+        display: flex;
+        align-self: center;
+
+        .item{
+            max-width: 100%;
+            margin: 0 auto;
+
+            img{
+                max-width: 200px;
+                height: auto;
+                border-radius: 5px;
+                margin: 5px;
+              }
+        }
+    }
+}

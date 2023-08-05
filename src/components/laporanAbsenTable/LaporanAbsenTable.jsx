@@ -1,33 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import './laporanTable.scss';
-import PdfGenerator from "../pdfGenerator/PdfGenerator";
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import './laporanAbsenTable.scss';
+import PdfGeneratorAbsen from "../pdfGenerator/PdfGeneratorAbsen";
 import { makeRequest } from '../../axios';
-import UpdateAcara from "../updateAcara/UpdateAcara";
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
-const LaporanTable = ({acaraId}) => {
+const LaporanAbsenTable = ({acaraId}) => {
   const [generatePDF, setGeneratePDF] = useState(false);
 
   const [data, setData] = useState([]);
-  const [total, setTotal] = useState([]);
 
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [errorData, setErrorData] = useState(null);
-
-  const fetchTotal = (acaraId) => {
-    const url = `laporan/total/${acaraId}`;
-
-  return makeRequest.get(url)
-    .then((res) => res.data)
-    .catch((error) => {
-      throw error;
-    });
-};
 
 const fetchData = (acaraId) => {
-  const url = `laporan/reim/${acaraId}`;
+  const url = `laporan/absen/${acaraId}`;
 
 return makeRequest.get(url)
   .then((res) => res.data)
@@ -37,23 +22,13 @@ return makeRequest.get(url)
 };
 
 useEffect(() => {
-  fetchTotal(acaraId)
-    .then((data) => {
-      setTotal(data[0].total);
-    })
-    .catch((error) => {
-      setError(error);
-    });
-},[]);
-
-useEffect(() => {
   fetchData(acaraId)
     .then((data) => {
       setData(data);
       setIsLoading(false);
     })
     .catch((error) => {
-      setErrorData(error);
+      setError(error);
       setIsLoading(false);
     });
 },[]);
@@ -68,7 +43,7 @@ useEffect(() => {
       
       <div className="unduhLink">
           <button onClick={togglePDFGeneration}>Unduh Laporan</button>
-          {generatePDF ? <PdfGenerator data={data} total={total?total:0} /> : null}
+          {generatePDF ? <PdfGeneratorAbsen data={data}/> : null}
       </div>
       
       : null}
@@ -82,11 +57,10 @@ useEffect(() => {
           <thead>
             <tr>
               <th>No</th>
+              <th>Tanggal Absensi</th>
+              <th>Email</th>
               <th>Nama</th>
-              <th>Total</th>
               <th>Acara</th>
-              <th>Nomor Rekening</th>
-              <th>Bank</th>
               <th style={{textAlign: "left"}}>Status</th>
             </tr>
           </thead>
@@ -95,18 +69,14 @@ useEffect(() => {
               <React.Fragment key={index}>
                 <tr>
                 <td>{index + 1}</td>
+                  <td>{(() => new Date(post.createdAt).toLocaleDateString('en-GB'))()}</td>
+                  <td>{post.email}</td>
                   <td>{post.nama}</td>
-                  <td>{post.total_nominal}</td>
                   <td>{post.namaAcara}</td>
-                  <td>{post.nomor}</td>
-                  <td>{post.bank}</td>
-                  <td>{post.rm_status}</td>
+                  <td>{post.status}</td>
                 </tr>
               </React.Fragment>
             ))}
-            <tr>
-              <td colSpan={7} style={{textAlign:"center"}}>Total Nominal: {total?total:0}</td>
-            </tr>
           </tbody>
         </table>
       )}
@@ -114,4 +84,4 @@ useEffect(() => {
   );
 };
 
-export default LaporanTable;
+export default LaporanAbsenTable;
