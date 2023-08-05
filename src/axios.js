@@ -8,6 +8,6 @@ import axios from "axios";
 
 
 export const makeRequest = axios.create({
-    baseURL:"amre-server-new-production.up.railway.app/api/",
+    baseURL:"https://amre-server-new-production.up.railway.app",
     withCredentials: true,
 });
