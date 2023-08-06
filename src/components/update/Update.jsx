@@ -23,13 +23,13 @@ const Update = ({setOpenUpdate, user}) =>{
 
     const queryClient = useQueryClient()
 
-    const mutation = useMutation((user) =>{
-        return makeRequest.put("/users/updateUserProfile", user)
-    }, {
-        onSuccess: () =>{
-            queryClient.invalidateQueries(["user"])
+    const mutation = useMutation((user) => {
+        return makeRequest.put("/users/updateUserProfile", user);
+      }, {
+        onSuccess: () => {
+          queryClient.invalidateQueries(['user', authContext.currentUser.id, user.id]);
         },
-    })
+      });
 
     const handleClick = async (e) =>{
         e.preventDefault();
