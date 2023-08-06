@@ -9,7 +9,6 @@ const Update = ({setOpenUpdate, user}) =>{
 
     const [profile, setProfile] = useState(null)
     const authContext = useContext(AuthContext);
-    
 
     const upload = async (file)=>{
         try{
@@ -28,7 +27,7 @@ const Update = ({setOpenUpdate, user}) =>{
         return makeRequest.put("/users/updateUserProfile", user)
     }, {
         onSuccess: () =>{
-            queryClient.invalidateQueries(['user', authContext.currentUser.id, user.id])
+            queryClient.invalidateQueries(["user"])
         },
     })
 
