@@ -62,6 +62,7 @@ const UpdatePost = ({setUpdateOpen, reim}) =>{
                     </div>
                     <div className="right">
                         {profile && <img className="file" alt="" src={URL.createObjectURL(profile)} />}
+                        {!profile && reim.img && <img className="file" alt="" src={URL.createObjectURL(reim.img)} />}
                     </div>
                     
                 </div>
@@ -72,7 +73,7 @@ const UpdatePost = ({setUpdateOpen, reim}) =>{
                         <label htmlFor="file">
                             <div className="item">
                                 <AddAPhotoOutlinedIcon/>
-                                <span>Tambah Gambar</span>
+                                <span>Tambah / Ubah Gambar</span>
                             </div>
                         </label>
                     </div>
