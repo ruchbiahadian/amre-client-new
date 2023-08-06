@@ -42,8 +42,8 @@ const Update = ({setOpenUpdate, user, navigate}) =>{
           }
 
         mutation.mutate({profilePic: profileURL})
-        alert("Data berhasil diupdate")
         navigate("/")
+        alert("Profil berhasil diupdate")
     }
 
     return(
