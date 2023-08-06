@@ -43,6 +43,7 @@ const Update = ({setOpenUpdate, user}) =>{
 
         mutation.mutate({profilePic: profileURL})
         setOpenUpdate(false)
+        window.location.reload();
     }
 
     return(
