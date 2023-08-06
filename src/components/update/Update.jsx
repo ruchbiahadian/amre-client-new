@@ -28,7 +28,6 @@ const Update = ({setOpenUpdate, user}) =>{
     }, {
         onSuccess: () =>{
             queryClient.invalidateQueries(["user"])
-            window.location.reload();
         },
     })
 
