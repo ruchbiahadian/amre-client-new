@@ -84,7 +84,7 @@ const Profile = () => {
     }, {
         onSuccess: () =>{
             queryClient.invalidateQueries(["user"])
-            window.location.reload();
+            // window.location.reload();
         },
     })
 
