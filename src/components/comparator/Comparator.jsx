@@ -76,8 +76,8 @@ const Comparator = ({ acaraId }) => {
                     <div className="item">
                         {similarImages.map((pair, index) => (
                             <div key={index}>
-                                <img src={`./invoice/` + pair[0]} alt="" />
-                                <img src={`./invoice/` + pair[1]} alt="" />
+                                <img src={`${makeRequest.defaults.baseURL}invoicefile/${pair[0]}`} alt="" />
+                                <img src={`${makeRequest.defaults.baseURL}invoicefile/${pair[1]}`} alt="" />
                             </div>
                         ))}
                     </div>
