@@ -8,6 +8,7 @@ import Update from "../../components/update/Update"
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import UpdatePswd from "../../components/updatePswd/UpdatePswd"
 import GetRekening from "../../components/getRekening/GetRekening";
+import { Link, useNavigate } from "react-router-dom"
 
 
 
@@ -24,6 +25,8 @@ const Profile = () => {
 
     // const userId = parseInt(useLocation().pathname.split("/")[2]);
     const { id: userId } = useParams();
+
+    const navigate = useNavigate() 
 
     // const { isLoading, error, data } = useQuery(
     //   ["user"],
@@ -84,7 +87,7 @@ const Profile = () => {
     }, {
         onSuccess: () =>{
             queryClient.invalidateQueries(["user"])
-            // window.location.reload();
+            navigate("/profile/" + currentUser.id)
         },
     })
 
