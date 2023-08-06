@@ -33,33 +33,21 @@ const Profile = () => {
     //       .then((res) => res.data)
     // ); 
 
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const [data, setData] = useState(null);
+    const url = currentUser.role === 3
+    ? `/users/find/${userId}`
+    : `/users/find/admin/${userId}`;
 
-    const fetchData = (currentUser, userId) => {
-      const url = currentUser.role === 3
-        ? `/users/find/${userId}`
-        : `/users/find/admin/${userId}`;
+  const { isLoading, error, data } = useQuery(['user', currentUser, userId], () =>
+    makeRequest.get(url).then((res) => res.data)
+  );
+
+  useEffect(() => {
+    if (!isLoading && !error) {
+      setData(data);
+    }
+  }, [data, isLoading, error]);
+
     
-      return makeRequest.get(url)
-        .then((res) => res.data)
-        .catch((error) => {
-          throw error;
-        });
-    };
-
-    useEffect(() => {
-      fetchData(currentUser, userId)
-        .then((data) => {
-          setData(data);
-          setIsLoading(false);
-        })
-        .catch((error) => {
-          setError(error);
-          setIsLoading(false);
-        });
-    }, [currentUser, userId]);
 
     // Update
     const [texts, setTexts] = useState({
