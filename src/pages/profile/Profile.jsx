@@ -123,7 +123,7 @@ const Profile = () => {
                 <div className="info">
                   <div className="image">
                     <img
-                      src={"/profile/" + data.profilePic}
+                      src={`${makeRequest.defaults.baseURL}profilefile/${data.profilePic}`}
                       alt=""
                       className="profilePic"
                     />
