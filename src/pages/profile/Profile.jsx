@@ -34,14 +34,12 @@ const Profile = () => {
     // ); 
 
     const url = currentUser.role === 3
-        ? `/users/find/${userId}`
-        : `/users/find/admin/${userId}`;
+    ? `/users/find/${userId}`
+    : `/users/find/admin/${userId}`;
 
-    const { isLoading} = useQuery(["user"], () =>
-    makeRequest.get(url).then((res)=>{
-        return res.data;
-    })
-);
+    const { isLoading, error, data } = useQuery(['user', currentUser, userId], () =>
+      makeRequest.get(url).then((res) => res.data)
+    );
 
     // Update
     const [texts, setTexts] = useState({
