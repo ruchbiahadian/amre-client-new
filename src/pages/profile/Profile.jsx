@@ -33,26 +33,46 @@ const Profile = () => {
     //       .then((res) => res.data)
     // ); 
 
-    const url = currentUser.role === 3
-    ? `/users/find/${userId}`
-    : `/users/find/admin/${userId}`;
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [data, setData] = useState(null);
 
-    const { isLoading, error, data } = useQuery(['user', currentUser, userId], () =>
-      makeRequest.get(url).then((res) => res.data)
-    );
+    const fetchData = (currentUser, userId) => {
+      const url = currentUser.role === 3
+        ? `/users/find/${userId}`
+        : `/users/find/admin/${userId}`;
+    
+      return makeRequest.get(url)
+        .then((res) => res.data)
+        .catch((error) => {
+          throw error;
+        });
+    };
+
+    useEffect(() => {
+      fetchData(currentUser, userId)
+        .then((data) => {
+          setData(data);
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setError(error);
+          setIsLoading(false);
+        });
+    }, [currentUser, userId]);
 
     // Update
     const [texts, setTexts] = useState({
-        email: data.email,
-        nama: data.nama,
-        noTelp: data.noTelp,
-        instansi: data.instansi,
-        jenis: data.jenis,
-        tahun: data.tahun,
-        domisili: data.domisili,
-        nomor: data.nomor,
-        bank: data.bank,
-        namaRek: data.namaRek,
+        email: "",
+        nama: "",
+        noTelp: "",
+        instansi: "",
+        jenis: "",
+        tahun: "",
+        domisili: "",
+        nomor: "",
+        bank: "",
+        namaRek: "",
         role: currentUser.role,
     });
 
@@ -73,10 +93,24 @@ const Profile = () => {
 
     const handleClick = async (e) =>{
         e.preventDefault();
+
+        texts.email = texts.email ? texts.email : data.email;
+        texts.nama = texts.nama ? texts.nama : data.nama;
+        texts.noTelp = texts.noTelp ? texts.noTelp : data.noTelp;
+        texts.instansi = texts.instansi ? texts.instansi : data.instansi;
+        texts.jenis = texts.jenis ? texts.jenis : data.jenis;
+        texts.tahun = texts.tahun ? texts.tahun : data.tahun;
+        texts.domisili = texts.domisili ? texts.domisili : data.domisili;
+        texts.nomor = texts.nomor ? texts.nomor : data.nomor;
+        texts.bank = texts.bank ? texts.bank : data.bank;
+        texts.namaRek = texts.namaRek ? texts.namaRek : data.namaRek;
+
         
         mutation.mutate({...texts})
  
-        alert("Data berhasil diubah")
+        window.location.reload();
+
+
     }
     
     return (
@@ -119,7 +153,7 @@ const Profile = () => {
                     <input
                       type="text"
                       name="email"
-                      value={texts.email}
+                      placeholder={data.email}
                       onChange={handleChange}
                     />
                   </div>
@@ -128,7 +162,7 @@ const Profile = () => {
                     <input
                       type="text"
                       name="nama"
-                      value={texts.nama}
+                      placeholder={data.nama}
                       onChange={handleChange}
                     />
                   </div>
@@ -137,7 +171,7 @@ const Profile = () => {
                     <input
                       type="text"
                       name="noTelp"
-                      value={texts.noTelp}
+                      placeholder={data.noTelp}
                       onChange={handleChange}
                     />
                   </div>
@@ -146,7 +180,7 @@ const Profile = () => {
                     <input
                       type="text"
                       name="instansi"
-                      value={texts.instansi}
+                      placeholder={data.instansi}
                       onChange={handleChange}
                     />
                   </div>
@@ -156,7 +190,7 @@ const Profile = () => {
                     <input
                       type="text"
                       name="data"
-                      value={texts.jenis}
+                      placeholder={data.jenis}
                       onChange={handleChange}
                     />
                   </div>
@@ -166,7 +200,7 @@ const Profile = () => {
                     <input
                       type="number"
                       name="tahun"
-                      value={texts.tahun}
+                      placeholder={data.tahun}
                       onChange={handleChange}
                     />
                   </div>
@@ -175,7 +209,7 @@ const Profile = () => {
                     <input
                       type="text"
                       name="domisili"
-                      value={texts.domisili}
+                      placeholder={data.domisili}
                       onChange={handleChange}
                     />
                   </div>
@@ -185,7 +219,7 @@ const Profile = () => {
                       <input
                         type="text"
                         name="nomor"
-                        value={texts.nomor}
+                        placeholder={data.nomor}
                         onChange={handleChange}
                       />
                     </div>
@@ -197,7 +231,7 @@ const Profile = () => {
                       <input
                         type="text"
                         name="bank"
-                        value={texts.bank}
+                        placeholder={data.bank}
                         onChange={handleChange}
                       />
                     </div>
@@ -208,7 +242,7 @@ const Profile = () => {
                         <input
                           type="text"
                           name="namaRek"
-                          value={texts.namaRek}
+                          placeholder={data.namaRek}
                           onChange={handleChange}
                         />
                     </div>
