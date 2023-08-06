@@ -87,7 +87,7 @@ const Profile = () => {
     }, {
         onSuccess: () =>{
             queryClient.invalidateQueries(["user"])
-            navigate("/profile/" + currentUser.id)
+            navigate("/")
         },
     })
 
