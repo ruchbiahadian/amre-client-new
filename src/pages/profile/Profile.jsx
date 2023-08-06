@@ -119,7 +119,7 @@ const Profile = () => {
                     <input
                       type="text"
                       name="email"
-                      value={data.email}
+                      value={texts.email}
                       onChange={handleChange}
                     />
                   </div>
@@ -128,7 +128,7 @@ const Profile = () => {
                     <input
                       type="text"
                       name="nama"
-                      value={data.nama}
+                      value={texts.nama}
                       onChange={handleChange}
                     />
                   </div>
@@ -137,7 +137,7 @@ const Profile = () => {
                     <input
                       type="text"
                       name="noTelp"
-                      value={data.noTelp}
+                      value={texts.noTelp}
                       onChange={handleChange}
                     />
                   </div>
@@ -146,7 +146,7 @@ const Profile = () => {
                     <input
                       type="text"
                       name="instansi"
-                      value={data.instansi}
+                      value={texts.instansi}
                       onChange={handleChange}
                     />
                   </div>
@@ -156,7 +156,7 @@ const Profile = () => {
                     <input
                       type="text"
                       name="data"
-                      value={data.jenis}
+                      value={texts.jenis}
                       onChange={handleChange}
                     />
                   </div>
@@ -166,7 +166,7 @@ const Profile = () => {
                     <input
                       type="number"
                       name="tahun"
-                      value={data.tahun}
+                      value={texts.tahun}
                       onChange={handleChange}
                     />
                   </div>
@@ -175,7 +175,7 @@ const Profile = () => {
                     <input
                       type="text"
                       name="domisili"
-                      value={data.domisili}
+                      value={texts.domisili}
                       onChange={handleChange}
                     />
                   </div>
@@ -185,7 +185,7 @@ const Profile = () => {
                       <input
                         type="text"
                         name="nomor"
-                        value={data.nomor}
+                        value={texts.nomor}
                         onChange={handleChange}
                       />
                     </div>
@@ -197,7 +197,7 @@ const Profile = () => {
                       <input
                         type="text"
                         name="bank"
-                        value={data.bank}
+                        value={texts.bank}
                         onChange={handleChange}
                       />
                     </div>
@@ -208,7 +208,7 @@ const Profile = () => {
                         <input
                           type="text"
                           name="namaRek"
-                          value={data.namaRek}
+                          value={texts.namaRek}
                           onChange={handleChange}
                         />
                     </div>
