@@ -27,7 +27,7 @@ const Update = ({setOpenUpdate, user}) =>{
         return makeRequest.put("/users/updateUserProfile", user)
     }, {
         onSuccess: () =>{
-            queryClient.invalidateQueries(["user"])
+            queryClient.invalidateQueries(['user', currentUser, user.id])
         },
     })
 
