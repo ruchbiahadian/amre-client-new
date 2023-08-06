@@ -8,6 +8,7 @@ import Update from "../../components/update/Update"
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import UpdatePswd from "../../components/updatePswd/UpdatePswd"
 import GetRekening from "../../components/getRekening/GetRekening";
+import { Link, useNavigate } from "react-router-dom"
 
 
 
@@ -33,16 +34,33 @@ const Profile = () => {
     //       .then((res) => res.data)
     // ); 
 
-    const url = currentUser.role === 3
-    ? `/users/find/${userId}`
-    : `/users/find/admin/${userId}`;
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [data, setData] = useState(null);
 
-    const { isLoading, error, data } = useQuery(["user"], () =>
-      makeRequest.get(url).then((res)=>{
-          return res.data;
-      })
-    );
+    const fetchData = (currentUser, userId) => {
+      const url = currentUser.role === 3
+        ? `/users/find/${userId}`
+        : `/users/find/admin/${userId}`;
+    
+      return makeRequest.get(url)
+        .then((res) => res.data)
+        .catch((error) => {
+          throw error;
+        });
+    };
 
+    useEffect(() => {
+      fetchData(currentUser, userId)
+        .then((data) => {
+          setData(data);
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setError(error);
+          setIsLoading(false);
+        });
+    }, [currentUser, userId]);
 
     // Update
     const [texts, setTexts] = useState({
