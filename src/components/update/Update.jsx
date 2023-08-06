@@ -9,7 +9,6 @@ const Update = ({setOpenUpdate, user}) =>{
 
     const [profile, setProfile] = useState(null)
     const authContext = useContext(AuthContext);
-    const {currentUser} = useContext(AuthContext);
 
     const upload = async (file)=>{
         try{
@@ -24,13 +23,13 @@ const Update = ({setOpenUpdate, user}) =>{
 
     const queryClient = useQueryClient()
 
-    const mutation = useMutation((user) => {
-        return makeRequest.put("/users/updateUserProfile", user);
-      }, {
-        onSuccess: () => {
-          queryClient.invalidateQueries(['user', currentUser.id, user.id]);
+    const mutation = useMutation((user) =>{
+        return makeRequest.put("/users/updateUserProfile", user)
+    }, {
+        onSuccess: () =>{
+            queryClient.invalidateQueries(["user"])
         },
-      });
+    })
 
     const handleClick = async (e) =>{
         e.preventDefault();
@@ -43,7 +42,7 @@ const Update = ({setOpenUpdate, user}) =>{
           }
 
         mutation.mutate({profilePic: profileURL})
-        window.location.reload();
+        setOpenUpdate(false)
     }
 
     return(
