@@ -6,7 +6,7 @@ import "./comparator.scss";
 const Comparator = ({ acaraId }) => {
     const { currentUser } = useContext(AuthContext);
 
-    const folderPath = "/invoice";
+    const folderPath = `${makeRequest.defaults.baseURL}invoicefile`;
 
     const [similarImages, setSimilarImages] = useState([]);
     const [imageNames, setImageNames] = useState([]);
