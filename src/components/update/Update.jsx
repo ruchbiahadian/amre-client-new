@@ -5,7 +5,7 @@ import {useMutation, useQueryClient} from "@tanstack/react-query";
 import { AuthContext } from "../../context/authContext";
 import PhotoIcon from '@mui/icons-material/AddPhotoAlternate';
 
-const Update = ({setOpenUpdate, user}) =>{
+const Update = ({setOpenUpdate, user, navigate}) =>{
 
     const [profile, setProfile] = useState(null)
     const authContext = useContext(AuthContext);
