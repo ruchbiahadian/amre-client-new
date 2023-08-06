@@ -43,16 +43,16 @@ const Profile = () => {
 
     // Update
     const [texts, setTexts] = useState({
-        email: "",
-        nama: "",
-        noTelp: "",
-        instansi: "",
-        jenis: "",
-        tahun: "",
-        domisili: "",
-        nomor: "",
-        bank: "",
-        namaRek: "",
+        email: data.email,
+        nama: data.nama,
+        noTelp: data.noTelp,
+        instansi: data.instansi,
+        jenis: data.jenis,
+        tahun: data.tahun,
+        domisili: data.domisili,
+        nomor: data.nomor,
+        bank: data.bank,
+        namaRek: data.namaRek,
         role: currentUser.role,
     });
 
@@ -73,24 +73,10 @@ const Profile = () => {
 
     const handleClick = async (e) =>{
         e.preventDefault();
-
-        texts.email = texts.email ? texts.email : data.email;
-        texts.nama = texts.nama ? texts.nama : data.nama;
-        texts.noTelp = texts.noTelp ? texts.noTelp : data.noTelp;
-        texts.instansi = texts.instansi ? texts.instansi : data.instansi;
-        texts.jenis = texts.jenis ? texts.jenis : data.jenis;
-        texts.tahun = texts.tahun ? texts.tahun : data.tahun;
-        texts.domisili = texts.domisili ? texts.domisili : data.domisili;
-        texts.nomor = texts.nomor ? texts.nomor : data.nomor;
-        texts.bank = texts.bank ? texts.bank : data.bank;
-        texts.namaRek = texts.namaRek ? texts.namaRek : data.namaRek;
-
         
         mutation.mutate({...texts})
  
-        // window.location.reload();
-
-
+        alert("Data berhasil diubah")
     }
     
     return (
@@ -133,7 +119,7 @@ const Profile = () => {
                     <input
                       type="text"
                       name="email"
-                      placeholder={data.email}
+                      value={data.email}
                       onChange={handleChange}
                     />
                   </div>
@@ -142,7 +128,7 @@ const Profile = () => {
                     <input
                       type="text"
                       name="nama"
-                      placeholder={data.nama}
+                      value={data.nama}
                       onChange={handleChange}
                     />
                   </div>
@@ -151,7 +137,7 @@ const Profile = () => {
                     <input
                       type="text"
                       name="noTelp"
-                      placeholder={data.noTelp}
+                      value={data.noTelp}
                       onChange={handleChange}
                     />
                   </div>
@@ -160,7 +146,7 @@ const Profile = () => {
                     <input
                       type="text"
                       name="instansi"
-                      placeholder={data.instansi}
+                      value={data.instansi}
                       onChange={handleChange}
                     />
                   </div>
@@ -170,7 +156,7 @@ const Profile = () => {
                     <input
                       type="text"
                       name="data"
-                      placeholder={data.jenis}
+                      value={data.jenis}
                       onChange={handleChange}
                     />
                   </div>
@@ -180,7 +166,7 @@ const Profile = () => {
                     <input
                       type="number"
                       name="tahun"
-                      placeholder={data.tahun}
+                      value={data.tahun}
                       onChange={handleChange}
                     />
                   </div>
@@ -189,7 +175,7 @@ const Profile = () => {
                     <input
                       type="text"
                       name="domisili"
-                      placeholder={data.domisili}
+                      value={data.domisili}
                       onChange={handleChange}
                     />
                   </div>
@@ -199,7 +185,7 @@ const Profile = () => {
                       <input
                         type="text"
                         name="nomor"
-                        placeholder={data.nomor}
+                        value={data.nomor}
                         onChange={handleChange}
                       />
                     </div>
@@ -211,7 +197,7 @@ const Profile = () => {
                       <input
                         type="text"
                         name="bank"
-                        placeholder={data.bank}
+                        value={data.bank}
                         onChange={handleChange}
                       />
                     </div>
@@ -222,7 +208,7 @@ const Profile = () => {
                         <input
                           type="text"
                           name="namaRek"
-                          placeholder={data.namaRek}
+                          value={data.namaRek}
                           onChange={handleChange}
                         />
                     </div>
