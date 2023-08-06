@@ -25,41 +25,16 @@ const Profile = () => {
     // const userId = parseInt(useLocation().pathname.split("/")[2]);
     const { id: userId } = useParams();
 
-    // const { isLoading, error, data } = useQuery(
-    //   ["user"],
-    //   () =>
-    //     makeRequest
-    //       .get(currentUser.role === 3 ? "/users/find/" + userId : "/users/find/admin/" + userId)
-    //       .then((res) => res.data)
-    // ); 
+    const url =
+    currentUser.role === 3
+      ? `/users/find/${userId}`
+      : `/users/find/admin/${userId}`;
 
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const [data, setData] = useState(null);
-
-    const fetchData = (currentUser, userId) => {
-      const url = currentUser.role === 3
-        ? `/users/find/${userId}`
-        : `/users/find/admin/${userId}`;
-    
-      return makeRequest.get(url)
-        .then((res) => res.data)
-        .catch((error) => {
-          throw error;
-        });
-    };
-
-    useEffect(() => {
-      fetchData(currentUser, userId)
-        .then((data) => {
-          setData(data);
-          setIsLoading(false);
-        })
-        .catch((error) => {
-          setError(error);
-          setIsLoading(false);
-        });
-    }, [currentUser, userId]);
+  const { isLoading, error, data } = useQuery(
+    ["user"],
+    () =>
+      makeRequest.get(url).then((res) => res.data)
+  );
 
     // Update
     const [texts, setTexts] = useState({
@@ -108,7 +83,7 @@ const Profile = () => {
         
         mutation.mutate({...texts})
  
-        window.location.reload();
+        // window.location.reload();
 
 
     }
