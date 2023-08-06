@@ -26,6 +26,10 @@ const Profile = () => {
     // const userId = parseInt(useLocation().pathname.split("/")[2]);
     const { id: userId } = useParams();
 
+    useEffect(() => {
+      queryClient.invalidateQueries(["user"]);
+    }, [currentUser.id]);
+
     const navigate = useNavigate() 
 
     // const { isLoading, error, data } = useQuery(
