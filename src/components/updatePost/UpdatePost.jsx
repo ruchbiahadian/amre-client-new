@@ -66,7 +66,7 @@ const UpdatePost = ({setUpdateOpen, reim}) =>{
                             <img
                                 className="file"
                                 alt=""
-                                src={URL.createObjectURL(new Blob([`${makeRequest.defaults.baseURL}newsfile/${reim.img}`]))}
+                                src={URL.createObjectURL((`${makeRequest.defaults.baseURL}newsfile/${reim.img}`))}
                             />
                         )}
                     </div>
