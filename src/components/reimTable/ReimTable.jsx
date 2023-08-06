@@ -142,7 +142,7 @@ const handleTolak = async (e, reimId) => {
                       </table>
                     </td>
                     <td colSpan="2">
-                      <img src={`/invoice/` + post.invoicePic} alt="" />
+                      <img src={`${makeRequest.defaults.baseURL}invoicefile/${post.invoicePic}`} alt="" />
                     </td>
                   </tr>
                 )}

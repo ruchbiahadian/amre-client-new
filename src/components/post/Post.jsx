@@ -40,7 +40,7 @@ const Post = ({post}) => {
             <div className="container">
                 <div className="user">
                     <div className="userInfo">
-                        <img src={`/profile/` + post.profilePic} alt="" />
+                        <img src={`${makeRequest.defaults.baseURL}profilefile/${post.profilePic}`} alt="" />
                         <div className="details">
                             <Link to={`/profile/${post.userId}`} style={{textDecoration: "none", color: "inherit"}}>
                                 <span className="name">{post.nama}</span>
@@ -52,7 +52,7 @@ const Post = ({post}) => {
                 </div>
                 <div className="content">
                     <p>{post.desc}</p>
-                    <img src={"./news/" + post.img} alt="" />
+                    <img src={`${makeRequest.defaults.baseURL}newsfile/${post.img}`} alt="" />
                 </div>
                 <div className="info">
                     <div className="item" onClick={()=>setCommentOpen(!commentOpen)}>

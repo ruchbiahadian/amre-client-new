@@ -54,7 +54,7 @@ const Comments = ({postId}) =>{
                 : isLoading ? "Loading"
                 : data.map(comment=>(
                     <div className="comment" key={comment.id}>
-                        <img src={`/profile/` + comment.profilePic} alt="" />
+                        <img src={`${makeRequest.defaults.baseURL}profilefile/${comment.profilePic}`} alt="" />
                         <div className="info">
                             <span>{comment.nama}</span>
                             <p>{comment.desc}</p>

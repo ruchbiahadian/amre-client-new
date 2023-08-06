@@ -136,7 +136,7 @@ const handleHapus = async (e, reimId) => {
                       </table>
                     </td>
                     <td colSpan="2">
-                      <img src={`/absence/` + post.absencePic} alt="" />
+                      <img src={`${makeRequest.defaults.baseURL}absencefile/${post.absencePic}`} alt="" />
                     </td>
                   </tr>
                 )}
