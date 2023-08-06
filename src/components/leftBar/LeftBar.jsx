@@ -52,7 +52,7 @@ const LeftBar = () =>{
                     </div>
                     <div className={`item ${activeButton === 1 ? 'active' : ''}`} onClick={() => handleMenu(1)}>
                         <Link to={`/profile/${currentUser.id}`} style={{textDecoration: "none", color: "inherit"} } className="link">
-                            <img src={`${makeRequest.defaults.baseURL}profilefile/${data.profilePic}`} alt="" />
+                            <img src={`${makeRequest.defaults.baseURL}profilefile/${currentUser.profilePic}`} alt="" />
                             <span className="name">Profil</span>
                         </Link>
                     </div>
