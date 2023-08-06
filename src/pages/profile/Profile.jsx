@@ -254,7 +254,7 @@ const Profile = () => {
               </div>
             </>
           )}
-          {openUpdateProfile && <Update setOpenUpdate={setOpenUpdateProfile} user={data} />}
+          {openUpdateProfile && <Update setOpenUpdate={setOpenUpdateProfile} user={data} navigate={navigate} />}
           {openUpdatePassword && <UpdatePswd setOpenUpdate={setOpenUpdatePassword} user={data} />}
           {(openUpdateProfile) && (<div className="blackBg" onClick={()=>setOpenUpdateProfile(!openUpdateProfile)} />)}
           {(openUpdatePassword) && (<div className="blackBg" onClick={()=>setOpenUpdatePassword(!openUpdatePassword)} />)}
