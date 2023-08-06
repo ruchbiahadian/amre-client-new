@@ -108,7 +108,7 @@ const Profile = () => {
         
         mutation.mutate({...texts})
  
-        window.location.reload();
+        // window.location.reload();
 
 
     }
