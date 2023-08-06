@@ -43,7 +43,7 @@ const Update = ({setOpenUpdate, user, navigate}) =>{
           }
 
         mutation.mutate({profilePic: profileURL})
-        navigate("/profile" + currentUser.id)
+        navigate("/profile/" + currentUser.id)
     }
 
     return(
