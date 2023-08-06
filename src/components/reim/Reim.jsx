@@ -60,7 +60,7 @@ const Reim = ({post}) => {
                     </div>
                  </div>
                 }
-                {invOpen && <img src={"./invoice/" + post.invoicePic} alt="" />}
+                {invOpen && <img src={`${makeRequest.defaults.baseURL}profilefile/${post.invoicePic}`} alt="" />}
                 {invOpen && (<div className="blackBg" onClick={()=>setInvOpen(!invOpen)} />)}
                 {updateOpen && <UpdateReim setUpdateOpen={setUpdateOpen} reim={post} />}
                 {updateOpen && (<div className="blackBg" onClick={()=>setUpdateOpen(!updateOpen)} />)}

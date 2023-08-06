@@ -54,7 +54,7 @@ const Share = ({setAddOpen}) =>{
             <div className="container">
                 <div className="top">
                     <div className="left">
-                        <img src={`/profile/`+currentUser.profilePic} alt="" />
+                        <img src={`${makeRequest.defaults.baseURL}profilefile/${currentUser.profilePic}`} alt="" />
                         <input type="text" placeholder={`Buat berita baru?`} 
                         onChange={(e) => setDesc(e.target.value)}
                         value={desc} />

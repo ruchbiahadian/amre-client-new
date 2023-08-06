@@ -44,7 +44,7 @@ const Comments = ({postId}) =>{
     return (
         <div className="comments">
             <div className="write">
-                <img src={`/profile/` + currentUser.profilePic} alt="" />
+                <img src={`${makeRequest.defaults.baseURL}profilefile/${currentUser.profilePic}`} alt="" />
                 <input type="text" placeholder="Tulis Komentar" 
                 value={desc} onChange={e => setDesc(e.target.value)} />
                 <button onClick={handleClick} >Kirim</button>

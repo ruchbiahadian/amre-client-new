@@ -55,7 +55,7 @@ const Absen = ({post}) => {
                     </div>
                 </div>
                 }
-                {invOpen && <img src={"./absence/" + post.absencePic} alt="" />}
+                {invOpen && <img src={`${makeRequest.defaults.baseURL}absencefile/${post.absencePic}`} alt="" />}
                 {invOpen && (<div className="blackBg" onClick={()=>setInvOpen(!invOpen)} />)}
                 {updateOpen && <UpdateAbsen setUpdateOpen={setUpdateOpen} reim={post} />}
                 {updateOpen && (<div className="blackBg" onClick={()=>setUpdateOpen(!updateOpen)} />)}
