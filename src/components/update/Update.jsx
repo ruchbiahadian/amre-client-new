@@ -9,6 +9,7 @@ const Update = ({setOpenUpdate, user, navigate}) =>{
 
     const [profile, setProfile] = useState(null)
     const authContext = useContext(AuthContext);
+    const {currentUser} = useContext(AuthContext);
 
     const upload = async (file)=>{
         try{
@@ -42,7 +43,7 @@ const Update = ({setOpenUpdate, user, navigate}) =>{
           }
 
         mutation.mutate({profilePic: profileURL})
-        navigate("/")
+        navigate("/profile" + currentUser.id)
     }
 
     return(
