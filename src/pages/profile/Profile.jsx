@@ -25,10 +25,7 @@ const Profile = () => {
 
     // const userId = parseInt(useLocation().pathname.split("/")[2]);
     const { id: userId } = useParams();
-
-    useEffect(() => {
-      queryClient.invalidateQueries(["user"]);
-    }, [currentUser.id]);
+    
 
     const navigate = useNavigate() 
 
@@ -91,7 +88,7 @@ const Profile = () => {
     }, {
         onSuccess: () =>{
             queryClient.invalidateQueries(["user"])
-            navigate("/")
+            window.location.reload()
         },
     })
 
