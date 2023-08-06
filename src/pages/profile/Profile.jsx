@@ -37,15 +37,9 @@ const Profile = () => {
     ? `/users/find/${userId}`
     : `/users/find/admin/${userId}`;
 
-  const { isLoading, error, data } = useQuery(['user', currentUser, userId], () =>
-    makeRequest.get(url).then((res) => res.data)
-  );
-
-  useEffect(() => {
-    if (!isLoading && !error) {
-      setData(data);
-    }
-  }, [data, isLoading, error]);
+    const { isLoading, error, data } = useQuery(['user', currentUser, userId], () =>
+      makeRequest.get(url).then((res) => res.data)
+    );
 
     
 
