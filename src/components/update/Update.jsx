@@ -28,7 +28,6 @@ const Update = ({setOpenUpdate, user, navigate}) =>{
     }, {
         onSuccess: () =>{
             queryClient.invalidateQueries(["user"])
-            navigate("/")
         },
     })
 
@@ -43,7 +42,7 @@ const Update = ({setOpenUpdate, user, navigate}) =>{
           }
 
         mutation.mutate({profilePic: profileURL})
-        setOpenUpdate(false)
+        navigate("/")
     }
 
     return(
