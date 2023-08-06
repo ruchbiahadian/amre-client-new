@@ -62,15 +62,6 @@ const UpdatePost = ({setUpdateOpen, reim}) =>{
                     </div>
                     <div className="right">
                         {profile && <img className="file" alt="" src={URL.createObjectURL(profile)} />}
-                        {!profile && reim.img && (
-                            
-
-                            <img
-                                className="file"
-                                alt=""
-                                src={URL.createObjectURL((`${makeRequest.defaults.baseURL}newsfile/${reim.img}`))}
-                            />
-                        )}
                     </div>
                     
                 </div>
