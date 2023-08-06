@@ -4,14 +4,11 @@ import {makeRequest} from "../../axios";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import { AuthContext } from "../../context/authContext";
 import PhotoIcon from '@mui/icons-material/AddPhotoAlternate';
-import { Link, useNavigate } from "react-router-dom"
 
 const Update = ({setOpenUpdate, user}) =>{
 
     const [profile, setProfile] = useState(null)
     const authContext = useContext(AuthContext);
-    const navigate = useNavigate() 
-    const {currentUser} = useContext(AuthContext);
 
     const upload = async (file)=>{
         try{
@@ -45,8 +42,7 @@ const Update = ({setOpenUpdate, user}) =>{
           }
 
         mutation.mutate({profilePic: profileURL})
-        // setOpenUpdate(false)
-        navigate("/profile/" + currentUser.id)
+        setOpenUpdate(false)
     }
 
     return(

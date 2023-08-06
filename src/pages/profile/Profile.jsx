@@ -8,7 +8,6 @@ import Update from "../../components/update/Update"
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import UpdatePswd from "../../components/updatePswd/UpdatePswd"
 import GetRekening from "../../components/getRekening/GetRekening";
-import { Link, useNavigate } from "react-router-dom"
 
 
 
