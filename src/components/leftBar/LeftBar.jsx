@@ -96,14 +96,14 @@ const LeftBar = () =>{
                             </Link>
                         </div>
                     }
-                    {currentUser.role !== 3 &&
+                    {/* {currentUser.role !== 3 &&
                         <div className={`item ${activeButton === 8 ? 'active' : ''}`} onClick={() => handleMenu(8)}>
                             <Link to="/invoiceComparison" style={{textDecoration: "none", color: "inherit"}} className="link">
                                 <ReceiptIcon/>
                                 <span>Invoice Comparison</span>
                             </Link>
                         </div>
-                    }
+                    } */}
                     {currentUser.role !== 3 &&
                         <div className={`item ${activeButton === 9 ? 'active' : ''}`} onClick={() => handleMenu(9)}>
                             <Link to="/akun" style={{textDecoration: "none", color: "inherit"}} className="link">
